@@ -1,12 +1,6 @@
-# Big Train
+# Starter.node
 
-## A training and coaching community
-
-Big Train (the working name) is an application to help athletes and coaches to:
-
-* connect with each other
-* manage their training
-* provide feedback
+## A sample node.js application
 
 ### Development stack
 

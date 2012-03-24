@@ -1,4 +1,4 @@
-define(["jquery", "backbone", "text!templates/users.hbs"], ($, Backbone, template) ->
+define(["jquery", "backbone", "hbs!templates/users"], ($, Backbone, template) ->
 
   class IndexView extends Backbone.View
     tagName: "li"
@@ -7,8 +7,6 @@ define(["jquery", "backbone", "text!templates/users.hbs"], ($, Backbone, templat
     initialize: ->
       @render()
 
-    template: Handlebars.compile(template)
-
     render: ->
-      $(@el).html(@template(users: @collection.toJSON()))
+      $(@el).html(template(users: @collection.toJSON()))
 )
