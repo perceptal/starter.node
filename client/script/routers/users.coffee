@@ -1,9 +1,9 @@
-define(["backbone", "cs!models/users", "cs!models/user", "cs!views/users/index"], (Backbone, Users, User, IndexView) ->
+define(["backbone", "cs!models/users", "cs!models/user", "cs!views/users/index", "cs!views/users/show"], (Backbone, Users, User, IndexView, ShowView) ->
 
   class UsersRouter extends Backbone.Router
     routes:
-      "":                     "index",
-      "users/:id":            "edit",
+      "users/":               "index",
+      "users/:id":            "show",
       "users/search?q=:q":    "search"
 
     index: ->
@@ -16,7 +16,12 @@ define(["backbone", "cs!models/users", "cs!models/user", "cs!views/users/index"]
         error: ->
           alert "Error"
 
-    edit: (id) ->
+    show: (id) ->
+      user = new User({ id: id })
+
+      user.fetch
+        success: ->
+          new ShowView(model: user)
 
     search: (q) ->
 )

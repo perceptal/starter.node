@@ -1,12 +1,21 @@
-define(["jquery", "backbone", "hbs!templates/users"], ($, Backbone, template) ->
+define(["jquery", "backbone", "cs!views/users/user"], ($, Backbone, UserView) ->
 
   class IndexView extends Backbone.View
-    tagName: "li"
     el: "#users"
 
     initialize: ->
       @render()
 
     render: ->
-      $(@el).html(template(users: @collection.toJSON()))
+      self = @
+
+      @$el.empty()
+
+      @collection.each((user) ->
+        view = new UserView({ model: user })
+
+        self.$el.append(view.render().$el)
+      )
+
+      self
 )
