@@ -1,7 +1,7 @@
 define(["jquery", "backbone", "cs!views/users/user"], ($, Backbone, UserView) ->
 
   class ShowView extends Backbone.View
-    el: "#users"
+    el: "#body"
 
     initialize: ->
       @render()

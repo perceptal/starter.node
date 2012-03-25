@@ -2,9 +2,9 @@ module.exports = (app, User) ->
   authenticate = require "./authenticate"
   anonymous = require "./anonymous"
 
-  app.get "/users.:format?", anonymous, (req, res) ->
+  app.get "/users", anonymous, (req, res) ->
 
-    User.find({}, ["username", "email"], (err, users) ->
+    User.find({}, (err, users) ->
       res.json users
     )
 
@@ -12,3 +12,10 @@ module.exports = (app, User) ->
 
     User.findById req.params.id, (err, user) ->
       res.json user
+
+  app.get "/users/search/:q", anonymous, (req, res) ->
+
+    User.search(req.params.q, (err, users) ->
+        res.json users
+    )
+

@@ -1,5 +1,5 @@
-{
-    navigation: {
-
-    }
+{ "menu" : [
+    { "url": "#users", "text": "Members" },
+    { "url": "#administration", "text": "Administration" }
+  ]
 }

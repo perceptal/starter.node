@@ -3,8 +3,8 @@ define(["backbone", "cs!models/users", "cs!models/user", "cs!views/users/index",
   class UsersRouter extends Backbone.Router
     routes:
       "users/":               "index",
+      "users/search/:q":      "search"
       "users/:id":            "show",
-      "users/search?q=:q":    "search"
 
     index: ->
       users = new Users()
@@ -12,9 +12,6 @@ define(["backbone", "cs!models/users", "cs!models/user", "cs!views/users/index",
       users.fetch
         success: ->
           new IndexView(collection: users)
-
-        error: ->
-          alert "Error"
 
     show: (id) ->
       user = new User({ id: id })
@@ -24,4 +21,10 @@ define(["backbone", "cs!models/users", "cs!models/user", "cs!views/users/index",
           new ShowView(model: user)
 
     search: (q) ->
+      users = new Users()
+      users.url = users.search_url q
+
+      users.fetch
+        success: ->
+          new IndexView(collection: users)
 )

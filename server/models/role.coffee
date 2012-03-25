@@ -1,7 +1,9 @@
 mongoose  = require "mongoose"
 Schema    = mongoose.Schema
 
-module.exports = new Schema(
+RoleSchema = new Schema(
   owner       : Schema.ObjectId
   name        : { type: String }
 )
+
+module.exports = RoleSchema
