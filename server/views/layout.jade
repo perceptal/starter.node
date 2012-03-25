@@ -2,23 +2,21 @@
 html
   head
     title= title
-    link(rel="stylesheet", href="/css/default.css")
+    link(rel="stylesheet", href="/css/main.css")
 
     script(data-main="/script/main.js", src="/script/lib/require-1.0.7.js", type="text/javascript")
 
   body
-    header
-      h1 Starter.node
+    #container
+      #main
+        header
+            h2 Starter
 
-      nav#main
+            nav#main
 
-    div.container
-      aside
+        #body
+            != body
 
-      section#main
-
-        != body
-
-    footer
-      &copy; Perceptal Engineering 2012
+        footer
+            &copy; Perceptal Engineering 2012
 
