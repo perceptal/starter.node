@@ -1,18 +1,15 @@
-define(["jquery", "backbone", "cs!views/users/user", "hbs!templates/users/actions"], ($, Backbone, UserView, actions) ->
+define(["jquery", "backbone", "cs!views/users/user", "cs!views/navigation/users/actions"], ($, Backbone, UserView, ActionsView) ->
 
   class IndexView extends Backbone.View
-    el: "#body"
+    el: "#body .content"
 
     initialize: ->
+      @render_actions()
       @render()
 
-    events: {
-      "change input.search": "search"
-    }
-
     render: ->
-      self = @reset()
-      @render_actions()
+      self = @
+      @reset()
 
       @collection.each((user) ->
         view = new UserView({ model: user })
@@ -22,20 +19,20 @@ define(["jquery", "backbone", "cs!views/users/user", "hbs!templates/users/action
 
       self
 
-    render_actions: ->
-      @$el.append(actions({ query: @collection.query }))
-
     reset: ->
       @$el.empty()
 
-      this
+    render_actions: ->
+      new ActionsView()
 
-    search: ->
-      $search = @$el.find("input.search")
+      self = @
 
-      @collection = @collection.search $search.val()
+      $("input.search").bind("keyup", ->
+        self.search $(@)
+      )
+
+    search: ($input) ->
+      @collection = @collection.search $input.val()
 
       @render()
-
-      $search.focus()
 )

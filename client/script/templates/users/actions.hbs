@@ -1,7 +1,10 @@
 <nav class="users secondary">
     <ul>
         <li class="users">
-            <input class="search" placeholder="Search for users&rarr;" value="{{query}}"type="text" />
+            <input class="search" placeholder="Search for users&rarr;" type="text" />
         </li>
+        {{#each menu}}
+            <li><a href="{{url}}/">{{text}}</a></li>
+        {{/each}}
     </ul>
 </nav>

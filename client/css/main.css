@@ -84,21 +84,25 @@ div#body {
   margin: 0 0 20px 0;
   padding: 10px;
 }
-.content {
+div#body header {
+  margin: 0;
+  height: auto;
+}
+div#body .content {
   zoom: 1;
 }
-.content:before,
-.content:after {
+div#body .content:before,
+div#body .content:after {
   content: "";
   display: table;
 }
-.content:after {
+div#body .content:after {
   clear: both;
 }
-.content nav {
+div#body .content nav {
   float: left;
 }
-.content section {
+div#body .content section {
   float: left;
   padding: 10px 10px 10px 20px;
   min-height: 400px;
@@ -191,31 +195,31 @@ nav#user ul li.loading {
   padding-left: 26px;
 }
 nav#main ul.home li.home a,
-nav#users ul.home li.home a,
+nav#user ul.home li.home a,
 nav#security ul.home li.home a,
 nav#main ul.settings li.settings a,
-nav#users ul.settings li.settings a,
+nav#user ul.settings li.settings a,
 nav#security ul.settings li.settings a,
 nav#main ul.profile li.profile a,
-nav#users ul.profile li.profile a,
+nav#user ul.profile li.profile a,
 nav#security ul.profile li.profile a,
 nav#main ul.password li.password a,
-nav#users ul.password li.password a,
+nav#user ul.password li.password a,
 nav#security ul.password li.password a,
-nav#main ul.users li.users a,
-nav#users ul.users li.users a,
-nav#security ul.users li.users a,
+nav#main ul.user li.user a,
+nav#user ul.user li.user a,
+nav#security ul.user li.user a,
 nav#main ul.aboutus li.aboutus a,
-nav#users ul.aboutus li.aboutus a,
+nav#user ul.aboutus li.aboutus a,
 nav#security ul.aboutus li.aboutus a,
 nav#main ul.contactus li.contactus a,
-nav#users ul.contactus li.contactus a,
+nav#user ul.contactus li.contactus a,
 nav#security ul.contactus li.contactus a,
 nav#main ul.organisations li.organisations a,
-nav#users ul.organisations li.organisations a,
+nav#user ul.organisations li.organisations a,
 nav#security ul.organisations li.organisations a,
 nav#main ul.sessions li.sessions a,
-nav#users ul.sessions li.sessions a,
+nav#user ul.sessions li.sessions a,
 nav#security ul.sessions li.sessions a {
   -webkit-box-shadow: 0.2;
   -moz-box-shadow: 0.2;

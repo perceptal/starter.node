@@ -5,5 +5,5 @@ define(["backbone", "cs!views/navigation/main"], (Backbone, MainNavView) ->
       "":                     "index"
 
     index: ->
-      new MainNavView()
+
 )

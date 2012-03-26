@@ -1,0 +1,7 @@
+{ "menu" : [
+    { "url": "#users", "text": "All" },
+    { "url": "#users/recent", "text": "Recent" },
+    { "url": "#users/favourites", "text": "Favourites" },
+    { "url": "#users/archived", "text": "Archived" }
+  ]
+}
