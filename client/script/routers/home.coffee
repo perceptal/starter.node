@@ -1,10 +1,8 @@
-define ["backbone", "cs!controllers/home"], (Backbone, HomeController) ->
+define ["cs!lib/router", "cs!controllers/home"], (Router, HomeController) ->
 
-  class HomeRouter extends Backbone.Router
+  class HomeRouter extends Router
     routes:
       "":                     "index"
-
-    controller: null
 
     initialize: ->
       @controller = new HomeController()

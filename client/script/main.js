@@ -26,6 +26,8 @@ require.config({
   urlArgs: 'bust=' +  (new Date()).getTime()
 });
 
-require(["domready", "cs!app"], function(domready, app) {
-  domready(function() { app.initialize(); });
+require(["domready", "cs!controllers/application"], function(domready, ApplicationController) {
+  domready(function() {
+      new ApplicationController();
+  });
 });

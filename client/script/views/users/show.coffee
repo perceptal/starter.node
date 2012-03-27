@@ -1,6 +1,6 @@
-define ["jquery", "backbone", "cs!views/users/user"], ($, Backbone, UserView) ->
+define ["jquery", "cs!lib/view", "cs!views/users/user"], ($, View, UserView) ->
 
-  class ShowView extends Backbone.View
+  class ShowView extends View
     el: "#body .content"
 
     initialize: ->

@@ -1,4 +1,4 @@
-define ->
+define ["backbone"], (Backbone) ->
   mediator = {}
 
   mediator.user = null

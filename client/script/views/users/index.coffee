@@ -1,6 +1,6 @@
-define ["jquery", "backbone", "cs!views/users/user"], ($, Backbone, UserView) ->
+define ["jquery", "cs!lib/view", "cs!views/users/user"], ($, View, UserView) ->
 
-  class IndexView extends Backbone.View
+  class IndexView extends View
     el: "#body .content"
 
     initialize: ->
@@ -11,8 +11,6 @@ define ["jquery", "backbone", "cs!views/users/user"], ($, Backbone, UserView) ->
       @reset()
 
       @collection.each((user) ->
-        console.log user.email
-
         view = new UserView({ model: user })
 
         self.$el.append(view.render().$el)

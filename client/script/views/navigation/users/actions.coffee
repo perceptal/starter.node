@@ -1,15 +1,19 @@
-define ["jquery", "backbone", "hbs!templates/users/actions", "text!./actions.json"], ($, Backbone, template, data) ->
+define ["jquery", "cs!lib/mediator", "cs!lib/view", "hbs!templates/users/actions", "text!./actions.json"], ($, mediator, View, template, data) ->
 
-    class UsersActionsView extends Backbone.View
+    class UsersActionsView extends View
       el: "#body header"
 
+      query: ""
+
       initialize: ->
+        @query = @options.query if @options.query
+
         @render()
 
       render: ->
         self = @
 
-        @$el.html(template(JSON.parse(data)))
+        @$el.html(template({ q: @query, actions: JSON.parse(data) }))
 
         $("input.search").bind("keyup", ->
           self.search $(@)
@@ -18,4 +22,8 @@ define ["jquery", "backbone", "hbs!templates/users/actions", "text!./actions.jso
         this
 
       search: ($input) ->
-        console.log($input.val())
+        q = $input.val()
+
+        mediator.publish "users:search", q
+
+

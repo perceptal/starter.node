@@ -1,12 +1,10 @@
-define ["backbone", "cs!controllers/users"], (Backbone, UsersController) ->
+define ["cs!lib/router", "cs!controllers/users"], (Router, UsersController) ->
 
-  class UsersRouter extends Backbone.Router
+  class UsersRouter extends Router
     routes:
       "users/":               "index",
       "users/search/:q":      "search"
       "users/:id":            "show",
-
-    controller: null
 
     initialize: ->
       @controller = new UsersController()

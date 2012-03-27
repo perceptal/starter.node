@@ -1,6 +1,6 @@
-define ["jquery", "backbone", "hbs!templates/users/user"], ($, Backbone, template) ->
+define ["jquery", "cs!lib/view", "hbs!templates/users/user"], ($, View, template) ->
 
-  class UserView extends Backbone.View
+  class UserView extends View
     tagName: "article"
     className: "list"
 

@@ -1,8 +1,9 @@
-define ["cs!lib/controller", "cs!models/users", "cs!models/user", "cs!views/users/index", "cs!views/users/show", "cs!views/navigation/users/actions"], (Controller, Users, User, IndexView, ShowView, ActionsView) ->
+define ["cs!lib/mediator", "cs!lib/controller", "cs!models/users", "cs!models/user", "cs!views/users/index", "cs!views/users/show", "cs!views/navigation/users/actions"], (mediator, Controller, Users, User, IndexView, ShowView, ActionsView) ->
 
   class UsersController extends Controller
 
     initialize: ->
+      mediator.subscribe "users:search", @search
 
     index: ->
       @log "users", "index"
@@ -25,12 +26,10 @@ define ["cs!lib/controller", "cs!models/users", "cs!models/user", "cs!views/user
           new ShowView(model: user)
 
     search: (q) ->
-      @log "users", "search", q
-
       users = new Users()
       users.url = users.search_url q
 
       users.fetch
         success: ->
-          new ActionsView()
+          new ActionsView(query: q)
           new IndexView(collection: users)
