@@ -1,5 +1,8 @@
-define ->
+define ["underscore", "cs!./subscriber"], (_, Subscriber) ->
+
   class Controller
+
+    _(Controller.prototype).defaults Subscriber
 
     constructor: ->
       @initialize()
@@ -8,3 +11,12 @@ define ->
 
     log: ->
       console.log arguments
+
+    disposed: false
+
+    dispose: ->
+      return if @disposed
+
+      @unsubscribe_all_events()
+
+      @disposed = true

@@ -1,5 +1,7 @@
-define ["backbone", "cs!models/user"], (Backbone, User) ->
-  class Users extends Backbone.Collection
+define ["cs!lib/collection", "cs!models/user"], (Collection, User) ->
+
+  class Users extends Collection
+
     model:  User
     urlRoot: "/users/"
     url:    "/users/"

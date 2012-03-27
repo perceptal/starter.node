@@ -15,9 +15,7 @@ module.exports = (app, User) ->
 
   app.get "/users/search/:q", anonymous, (req, res) ->
 
-    User.search(req.params.q, (err, users) ->
-        console.log users
-
+    User.search req.params.q, (err, users) ->
         res.json users
-    )
+
 

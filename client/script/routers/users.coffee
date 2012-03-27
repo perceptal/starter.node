@@ -1,4 +1,4 @@
-define ["backbone", "cs!controllers/users", "cs!models/users", "cs!models/user", "cs!views/users/index", "cs!views/users/show", "cs!views/navigation/users/actions"], (Backbone, UsersController, Users, User, IndexView, ShowView, ActionsView) ->
+define ["backbone", "cs!controllers/users"], (Backbone, UsersController) ->
 
   class UsersRouter extends Backbone.Router
     routes:

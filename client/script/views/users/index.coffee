@@ -11,6 +11,8 @@ define ["jquery", "backbone", "cs!views/users/user"], ($, Backbone, UserView) ->
       @reset()
 
       @collection.each((user) ->
+        console.log user.email
+
         view = new UserView({ model: user })
 
         self.$el.append(view.render().$el)
