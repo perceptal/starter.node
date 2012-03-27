@@ -1,4 +1,3 @@
-define(["backbone"], (Backbone) ->
+define ["backbone"], (Backbone) ->
   class User extends Backbone.Model
     urlRoot: "/users/"
-)

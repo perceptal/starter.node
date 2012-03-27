@@ -1,10 +1,4 @@
-define(["jquery", "backbone", "cs!views/navigation/main", "cs!routers/home", "cs!routers/users"], ($, Backbone, MainNavView, HomeRouter, UsersRouter) ->
+define ["cs!controllers/application"], (ApplicationController) ->
 
   initialize: ->
-    new MainNavView()
-
-    new HomeRouter()
-    new UsersRouter()
-
-    Backbone.history.start()
-)
+    new ApplicationController()

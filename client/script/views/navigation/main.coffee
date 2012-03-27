@@ -1,4 +1,4 @@
-define(["jquery", "backbone", "hbs!templates/navigation/index", "text!./main.json"], ($, Backbone, template, data) ->
+define ["jquery", "backbone", "hbs!templates/navigation/index", "text!./main.json"], ($, Backbone, template, data) ->
 
   class IndexView extends Backbone.View
     el: "nav#main"
@@ -10,4 +10,3 @@ define(["jquery", "backbone", "hbs!templates/navigation/index", "text!./main.jso
       @$el.html(template(JSON.parse(data)))
 
       this
-)

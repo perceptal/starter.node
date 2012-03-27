@@ -1,9 +1,13 @@
-define(["backbone", "cs!views/navigation/main"], (Backbone, MainNavView) ->
+define ["backbone", "cs!controllers/home"], (Backbone, HomeController) ->
 
   class HomeRouter extends Backbone.Router
     routes:
       "":                     "index"
 
-    index: ->
+    controller: null
 
-)
+    initialize: ->
+      @controller = new HomeController()
+
+    index: ->
+      @controller.index()

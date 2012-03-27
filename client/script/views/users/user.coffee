@@ -1,4 +1,4 @@
-define(["jquery", "backbone", "hbs!templates/users/user"], ($, Backbone, template) ->
+define ["jquery", "backbone", "hbs!templates/users/user"], ($, Backbone, template) ->
 
   class UserView extends Backbone.View
     tagName: "article"
@@ -8,4 +8,3 @@ define(["jquery", "backbone", "hbs!templates/users/user"], ($, Backbone, templat
       @$el.html(template(@model.toJSON()))
 
       this
-)
