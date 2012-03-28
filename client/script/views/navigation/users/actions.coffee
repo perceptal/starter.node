@@ -6,6 +6,8 @@ define ["jquery", "cs!lib/mediator", "cs!lib/view", "hbs!templates/users/actions
       query: ""
 
       initialize: ->
+        mediator.subscribe "users:searched", @focus
+
         @query = @options.query if @options.query
 
         @render()
@@ -15,7 +17,7 @@ define ["jquery", "cs!lib/mediator", "cs!lib/view", "hbs!templates/users/actions
 
         @$el.html(template({ q: @query, actions: JSON.parse(data) }))
 
-        $("input.search").bind("keyup", ->
+        $(".users input.search").bind("keyup", ->
           self.search $(@)
         )
 
@@ -26,4 +28,6 @@ define ["jquery", "cs!lib/mediator", "cs!lib/view", "hbs!templates/users/actions
 
         mediator.publish "users:search", q
 
+      focus: ->
+        $(".users input.search").focus()
 

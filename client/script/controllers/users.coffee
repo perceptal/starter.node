@@ -26,6 +26,8 @@ define ["cs!lib/mediator", "cs!lib/controller", "cs!models/users", "cs!models/us
           new ShowView(model: user)
 
     search: (q) ->
+      return if q.length == 0
+
       users = new Users()
       users.url = users.search_url q
 
@@ -33,3 +35,5 @@ define ["cs!lib/mediator", "cs!lib/controller", "cs!models/users", "cs!models/us
         success: ->
           new ActionsView(query: q)
           new IndexView(collection: users)
+
+          mediator.publish "users:searched"

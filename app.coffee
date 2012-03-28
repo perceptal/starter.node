@@ -1,4 +1,4 @@
-configure = require "./configure"
+configure = require "./server/config/configure"
 model = require "./server/models/model"
 resource = require "./server/resources/resource"
 controller = require "./server/controllers/controller"
@@ -6,10 +6,10 @@ controller = require "./server/controllers/controller"
 app = configure()
 
 # Models
-["user", "role"].map((name) -> model(name))
+["user", "person", "role"].map((name) -> model(name))
 
 # Resources
-["user"].map((name) -> resource(app, name))
+["sessions", "users"].map((name) -> resource(app, name))
 
 # Controllers
 ["home"].map((name) -> controller(app, name))

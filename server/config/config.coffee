@@ -3,10 +3,14 @@ stylus = require "stylus"
 store = require "connect-mongodb"
 connection = require "./connection"
 
+dirname = __dirname + "/../.."
+server_dir = dirname + "/server"
+client_dir = dirname + "/client"
+
 exports.common = ->
-  @set "views", __dirname + "/server/views"
+  @set "views", server_dir + "/views"
   @set "view engine", "jade"
-  @use express.favicon __dirname + "/client/images/favicon.png"
+  @use express.favicon client_dir + "/images/favicon.png"
   @use express.bodyParser()
   @use express.cookieParser()
   @use express.methodOverride()
@@ -16,11 +20,11 @@ exports.common = ->
   @use @router
   @use stylus.middleware
     debug: true
-    src: __dirname + "/server/views"
-    dest: __dirname + "/client"
+    src: server_dir + "/views"
+    dest: client_dir
     force: true
     compile: compile
-  @use express.static(__dirname + "/client")
+  @use express.static(client_dir)
 
 exports.development = ->
   @set "db-uri", connection.development
@@ -41,6 +45,6 @@ compile = (str, path) ->
     .set("filename", path)
     .set("compress", false)
     .use(require("nib")())
-    .define("url", stylus.url({ paths: [__dirname + "/client"] }))
+    .define("url", stylus.url({ paths: [client_dir] }))
     .import("nib")
 

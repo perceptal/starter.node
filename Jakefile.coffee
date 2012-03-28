@@ -1,4 +1,4 @@
-connection = require "./connection"
+connection = require "./server/config/connection"
 model = require "./server/models/model"
 
 connect = ->

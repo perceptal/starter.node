@@ -1,6 +1,7 @@
 helper = require "./helper"
 
 describe "user", ->
+  helper.connect()
   User = helper.model "user"
   User.remove({})
 

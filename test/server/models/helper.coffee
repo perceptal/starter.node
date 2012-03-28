@@ -1,15 +1,14 @@
-express = require "express"
-mongoose = require "mongoose"
-config = require "../../../config"
-model = require("../../../server/models/model.coffee")
+connection = require "../../../server/config/connection"
+model = require "../../../server/models/model"
 
-connect = ->
-  app = express.createServer()
-  app.configure "test", config.test
-  mongoose.connect app.set("db-uri")
+module.exports.connect = ->
+  connection.connect connection[process.env.NODE_ENV || "test"]
+
+module.exports.disconnect = ->
+  connection.disconnect()
 
 module.exports.model = (name) ->
-  connect()
   model("user")
+
 
 
