@@ -2,20 +2,30 @@ define ["underscore", "backbone", "cs!./subscriber"], (_, Backbone, Subscriber) 
 
   class Router extends Backbone.Router
 
-    _(Router.prototype).defaults Subscriber
+    constructor: (options) ->
+      Backbone.Router::constructor.call this, options
 
-    controller: null
+      if @app_routes
+        controller = @controller
+        controller = options.controller if options and options.controller
 
-    log: ->
-      console.log arguments
+        @process_app_routes controller, @app_routes
 
-    disposed: false
+    process_app_routes: (controller, app_routes) ->
+      routes = []
+      router = @
 
-    dispose: ->
-      return if @disposed
+      for route of app_routes
+        routes.unshift [route, app_routes[route]]
 
-      @controller.dispose()
+      i = 0
 
-      @unsubscribe_all_events()
+      while i < routes.length
+        route = routes[i][0]
+        method_name = routes[i][1]
+        method = _.bind(controller[method_name], controller)
 
-      @disposed = true
+        router.route route, method_name, method
+
+        i++
+

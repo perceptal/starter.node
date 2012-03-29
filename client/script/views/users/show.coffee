@@ -1,8 +1,6 @@
 define ["jquery", "cs!lib/view", "cs!views/users/user"], ($, View, UserView) ->
 
   class ShowView extends View
-    el: "#body .content"
-
     initialize: ->
       @render()
 
@@ -12,8 +10,12 @@ define ["jquery", "cs!lib/view", "cs!views/users/user"], ($, View, UserView) ->
       view = new UserView({ model: @model, className: "item" })
 
       @$el.append(view.render().$el)
+      @$el.hide()
 
       this
+
+    on_show: ->
+      @$el.fadeIn 500
 
     reset: ->
       @$el.empty()

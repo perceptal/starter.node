@@ -6,11 +6,12 @@ PersonSchema = new Schema(
   first_name  : { type: String, required: true }
   last_name   : { type: String, required: true }
   title       : { type: String }
-  gender      : { type: String }
-  marital     : { type: String }
-  email       : { type: String, required: true, unique: true }
+  gender      : { type: String, enum: ["Male", "Female"]}
+  marital     : { type: String, enum: ["Single", "Married", "Divorced", "Widowed", "Separated"] }
+  dob         : { type: Date }
+  email       : { type: String, required: true, unique: true, lowercase: true }
   tel         : { type: String }
-  #user_id     : { type: Schema.ObjectId }
+  user_id     : { type: Schema.ObjectId }
 )
 
 PersonSchema.statics.search = (query, callback) ->

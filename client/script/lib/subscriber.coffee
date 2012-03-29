@@ -35,7 +35,7 @@ define ["cs!./mediator"], (mediator) ->
 
       for own type, handlers of @global_subscriptions
         for handler in handlers
-        # Remove global handler
+          # Remove global handler
           mediator.unsubscribe type, handler
 
       # Clear store

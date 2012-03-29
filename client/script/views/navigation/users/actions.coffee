@@ -1,8 +1,6 @@
 define ["jquery", "cs!lib/mediator", "cs!lib/view", "hbs!templates/users/actions", "text!./actions.json"], ($, mediator, View, template, data) ->
 
     class UsersActionsView extends View
-      el: "#body header"
-
       query: ""
 
       initialize: ->
@@ -13,15 +11,14 @@ define ["jquery", "cs!lib/mediator", "cs!lib/view", "hbs!templates/users/actions
         @render()
 
       render: ->
-        self = @
-
         @$el.html(template({ q: @query, actions: JSON.parse(data) }))
 
-        $(".users input.search").bind("keyup", ->
-          self.search $(@)
-        )
+        @
 
-        this
+      on_show: ->
+        self = @
+
+        $(".users input.search").bind "keyup", -> self.search $(@)
 
       search: ($input) ->
         q = $input.val()
@@ -29,5 +26,7 @@ define ["jquery", "cs!lib/mediator", "cs!lib/view", "hbs!templates/users/actions
         mediator.publish "users:search", q
 
       focus: ->
-        $(".users input.search").focus()
+        $search = $(".users input.search")
+        $search.focus()
+        $search.val($search.val())
 

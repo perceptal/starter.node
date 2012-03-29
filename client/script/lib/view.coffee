@@ -12,6 +12,9 @@ define ["underscore", "backbone", "cs!./subscriber"], (_, Backbone, Subscriber) 
     dispose: ->
       return if @disposed
 
+      @remove()
+      @unbind()
+
       @unsubscribe_all_events()
 
       @disposed = true

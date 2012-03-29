@@ -4,8 +4,4 @@ define ["cs!lib/router", "cs!controllers/home"], (Router, HomeController) ->
     routes:
       "":                     "index"
 
-    initialize: ->
-      @controller = new HomeController()
-
-    index: ->
-      @controller.index()
+    controller: new HomeController()
