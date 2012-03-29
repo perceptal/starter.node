@@ -1,8 +1,8 @@
 define ["underscore", "backbone", "cs!./subscriber"], (_, Backbone, Subscriber) ->
 
-  class View extends Backbone.View
+  class ItemView extends Backbone.View
 
-    _(View.prototype).defaults Subscriber
+    _(ItemView.prototype).defaults Subscriber
 
     log: ->
       console.log arguments

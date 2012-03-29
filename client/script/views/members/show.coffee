@@ -1,4 +1,4 @@
-define ["jquery", "cs!lib/view", "cs!views/members/member"], ($, View, ItemView) ->
+define ["jquery", "cs!lib/item_view", "cs!views/members/member"], ($, View, MemberView) ->
 
   class ShowView extends View
     initialize: ->
@@ -7,7 +7,7 @@ define ["jquery", "cs!lib/view", "cs!views/members/member"], ($, View, ItemView)
     render: ->
       @reset()
 
-      view = new ItemView({ model: @model, className: "item" })
+      view = new MemberView({ model: @model, className: "item" })
 
       @$el.append(view.render().$el)
       @$el.hide()
