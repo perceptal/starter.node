@@ -1,11 +1,12 @@
-define ["backbone", "cs!lib/controller", "cs!views/navigation/main", "cs!routers/home", "cs!routers/users"], (Backbone, Controller, MainNavView, HomeRouter, UsersRouter) ->
+define ["backbone", "cs!lib/region", "cs!lib/controller", "cs!views/navigation/main", "cs!routers/home", "cs!routers/members"], (Backbone, Region, Controller, NavView, HomeRouter, MembersRouter) ->
 
   class ApplicationController extends Controller
 
     initialize: ->
-      new MainNavView()
+      region = new Region({ el: "nav#main" })
+      region.show new NavView()
 
       new HomeRouter()
-      new UsersRouter()
+      new MembersRouter()
 
       Backbone.history.start()

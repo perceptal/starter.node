@@ -2,7 +2,7 @@ module.exports = (app, Person) ->
   authenticate = require "./authenticate"
   anonymous = require "./anonymous"
 
-  app.get "/persons", anonymous, (req, res) ->
+  app.get "/people", anonymous, (req, res) ->
 
     Person.find({}, (err, people) ->
         res.json people

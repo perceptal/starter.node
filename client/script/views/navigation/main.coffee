@@ -1,7 +1,7 @@
 define ["jquery", "cs!lib/view", "hbs!templates/navigation/index", "text!./main.json"], ($, View, template, data) ->
 
   class IndexView extends View
-    el: "nav#main"
+    tagName: "ul"
 
     initialize: ->
       @render()

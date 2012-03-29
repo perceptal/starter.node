@@ -1,5 +1,5 @@
 { "menu" : [
-    { "url": "#users", "text": "Members" },
+    { "url": "#members", "text": "Members" },
     { "url": "#administration", "text": "Administration" }
   ]
 }

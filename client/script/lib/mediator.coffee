@@ -3,12 +3,7 @@ define ["backbone"], (Backbone) ->
 
   mediator.user = null
 
-  mediator.router = null
-
   _(mediator).defaults Backbone.Events
-
-  # Initialize an empty callback list (so we might seal the object)
-  mediator._callbacks  = null
 
   # Create Publish/Subscribe aliases
   mediator.subscribe   = mediator.on      = Backbone.Events.on

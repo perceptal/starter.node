@@ -1,10 +1,11 @@
-define ["cs!lib/collection", "cs!models/user"], (Collection, User) ->
+define ["cs!lib/collection", "cs!models/member"], (Collection, Member) ->
 
   class Users extends Collection
 
-    model:  User
-    urlRoot: "/users/"
-    url:    "/users/"
+    model:    Member
+
+    urlRoot:  "/people/"
+    url:      "/people/"
 
     search_url: (q) ->
       @url + "search/" + q

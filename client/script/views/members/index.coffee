@@ -1,4 +1,4 @@
-define ["jquery", "cs!lib/view", "cs!views/users/user"], ($, View, UserView) ->
+define ["jquery", "cs!lib/view", "cs!views/members/member"], ($, View, ItemView) ->
 
   class IndexView extends View
     initialize: ->
@@ -8,8 +8,8 @@ define ["jquery", "cs!lib/view", "cs!views/users/user"], ($, View, UserView) ->
       self = @
       @reset()
 
-      @collection.each((user) ->
-        view = new UserView({ model: user })
+      @collection.each((item) ->
+        view = new ItemView({ model: item })
 
         self.$el.append(view.render().$el)
       )
