@@ -1,4 +1,14 @@
-define ["cs!lib/mediator", "cs!lib/region", "cs!lib/controller", "cs!models/members", "cs!models/member", "cs!views/members/index", "cs!views/members/show", "cs!views/navigation/members/actions"], (mediator, Region, Controller, Members, Member, IndexView, ShowView, ActionsView) ->
+define [
+    "cs!lib/mediator"
+  , "cs!lib/region"
+  , "cs!lib/controller"
+  , "cs!models/members"
+  , "cs!models/member"
+  , "cs!views/members/index"
+  , "cs!views/members/show"
+  , "cs!views/navigation/actions"
+  , "text!views/navigation/members/actions.json"
+], (mediator, Region, Controller, Members, Member, IndexView, ShowView, ActionsView, actions) ->
 
   class MembersController extends Controller
 
@@ -16,7 +26,7 @@ define ["cs!lib/mediator", "cs!lib/region", "cs!lib/controller", "cs!models/memb
 
       collection.fetch
         success: ->
-          ar.show new ActionsView()
+          ar.show new ActionsView({ search_for: "members", actions: actions })
           mr.show new IndexView(collection: collection)
 
     show: (id) ->
@@ -27,7 +37,7 @@ define ["cs!lib/mediator", "cs!lib/region", "cs!lib/controller", "cs!models/memb
 
       model.fetch
         success: ->
-          ar.show new ActionsView()
+          ar.show new ActionsView({ search_for: "members", actions: actions })
           mr.show new ShowView(model: model)
 
     search: (q) ->
@@ -41,7 +51,7 @@ define ["cs!lib/mediator", "cs!lib/region", "cs!lib/controller", "cs!models/memb
 
       collection.fetch
         success: ->
-          ar.show new ActionsView(query: q)
+          ar.show new ActionsView({ search_for: "members", actions: actions, query: q })
           mr.show new IndexView(collection: collection)
 
           mediator.publish "members:searched"

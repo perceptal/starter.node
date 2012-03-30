@@ -1,0 +1,6 @@
+{ "menu" : [
+    { "url": "#user",           "text": "Profile" }
+  , { "url": "#user/settings",  "text": "Settings" }
+  , { "url": "#user/password",  "text": "Password" }
+  ]
+}

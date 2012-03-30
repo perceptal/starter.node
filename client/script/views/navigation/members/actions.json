@@ -1,7 +1,7 @@
 { "menu" : [
-    { "url": "#members",            "text": "All" },
-    { "url": "#members/recent",     "text": "Recent" },
-    { "url": "#members/favourites", "text": "Favourites" },
-    { "url": "#members/archived",   "text": "Archived" }
+    { "url": "#members",            "text": "All" }
+  , { "url": "#members/recent",     "text": "Recent" }
+  , { "url": "#members/favourites", "text": "Favourites" }
+  , { "url": "#members/archived",   "text": "Archived" }
   ]
 }

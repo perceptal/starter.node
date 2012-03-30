@@ -1,0 +1,6 @@
+{ "menu" : [
+    { "url": "#legal",      "text": "Legal" }
+  , { "url": "#contact",    "text": "Contact" }
+  , { "url": "#about",      "text": "About" }
+  ]
+}

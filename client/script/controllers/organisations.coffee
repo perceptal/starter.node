@@ -1,4 +1,14 @@
-define ["cs!lib/mediator", "cs!lib/region", "cs!lib/controller", "cs!models/organisations", "cs!models/organisation", "cs!views/organisations/index", "cs!views/organisations/show", "cs!views/navigation/organisations/actions"], (mediator, Region, Controller, Organisations,Organisation, IndexView, ShowView, ActionsView) ->
+define [
+    "cs!lib/mediator"
+  , "cs!lib/region"
+  , "cs!lib/controller"
+  , "cs!models/organisations"
+  , "cs!models/organisation"
+  , "cs!views/organisations/index"
+  , "cs!views/organisations/show"
+  , "cs!views/navigation/actions"
+  , "text!views/navigation/organisations/actions.json"
+], (mediator, Region, Controller, Organisations,Organisation, IndexView, ShowView, ActionsView, actions) ->
 
   class OrganisationsController extends Controller
 
@@ -16,7 +26,7 @@ define ["cs!lib/mediator", "cs!lib/region", "cs!lib/controller", "cs!models/orga
 
       collection.fetch
         success: ->
-          ar.show new ActionsView()
+          ar.show new ActionsView({ search_for: "organisations", actions: actions })
           mr.show new IndexView(collection: collection)
 
     show: (id) ->
@@ -27,7 +37,7 @@ define ["cs!lib/mediator", "cs!lib/region", "cs!lib/controller", "cs!models/orga
 
       model.fetch
         success: ->
-          ar.show new ActionsView()
+          ar.show new ActionsView({ search_for: "organisations", actions: actions })
           mr.show new ShowView(model: model)
 
     search: (q) ->
@@ -41,7 +51,7 @@ define ["cs!lib/mediator", "cs!lib/region", "cs!lib/controller", "cs!models/orga
 
       collection.fetch
         success: ->
-          ar.show new ActionsView(query: q)
+          ar.show new ActionsView({ search_for: "organisations", actions: actions, query: q })
           mr.show new IndexView(collection: collection)
 
           mediator.publish "organisations:searched"
