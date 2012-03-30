@@ -1,4 +1,4 @@
-define ["cs!lib/collection", "cs!models/member"], (Collection, Member) ->
+define ["cs!lib/collection", "cs!./member"], (Collection, Member) ->
 
   class Users extends Collection
 

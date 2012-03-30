@@ -24,8 +24,6 @@ define ["jquery", "backbone"], ($, Backbone) ->
       unless @el
         throw new Error "No el is supplied"
 
-      console.log @el
-
     show: (view) ->
       @ensure_el()
 

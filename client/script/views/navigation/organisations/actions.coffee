@@ -3,4 +3,4 @@ define ["jquery", "cs!lib/mediator", "cs!../actions", "hbs!templates/navigation/
   class ActionsView extends View
 
     initialize: ->
-      @init({ search_for: "members", query: @options.query })
+      @init({ search_for: "organisations", query: @options.query })

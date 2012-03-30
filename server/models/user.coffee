@@ -2,7 +2,7 @@ mongoose  = require "mongoose"
 Schema    = mongoose.Schema
 
 UserSchema = new Schema(
-  owner       : Schema.ObjectId
+  owner       : { type: Schema.ObjectId }
   username    : { type: String, required: true, unique: true, lowercase: true }
 )
 

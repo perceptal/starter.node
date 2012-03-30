@@ -2,7 +2,7 @@ mongoose  = require "mongoose"
 Schema    = mongoose.Schema
 
 PersonSchema = new Schema(
-  owner       : Schema.ObjectId
+  owner       : { type: Schema.ObjectId }
   first_name  : { type: String, required: true }
   last_name   : { type: String, required: true }
   title       : { type: String }
@@ -12,6 +12,7 @@ PersonSchema = new Schema(
   email       : { type: String, required: true, unique: true, lowercase: true }
   tel         : { type: String }
   user_id     : { type: Schema.ObjectId }
+  group_id    : { type: Schema.ObjectId }
 )
 
 PersonSchema.statics.search = (query, callback) ->

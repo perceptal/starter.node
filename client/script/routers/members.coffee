@@ -1,4 +1,4 @@
-define ["cs!lib/router", "cs!controllers/members"], (Router, MembersController) ->
+define ["cs!lib/router", "cs!controllers/members"], (Router, Controller) ->
 
   class MembersRouter extends Router
     app_routes:
@@ -6,4 +6,4 @@ define ["cs!lib/router", "cs!controllers/members"], (Router, MembersController) 
       "members/search/:q":  "search"
       "members/:id":        "show",
 
-    controller: new MembersController()
+    controller: new Controller()

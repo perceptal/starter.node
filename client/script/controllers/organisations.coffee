@@ -1,15 +1,15 @@
-define ["cs!lib/mediator", "cs!lib/region", "cs!lib/controller", "cs!models/members", "cs!models/member", "cs!views/members/index", "cs!views/members/show", "cs!views/navigation/members/actions"], (mediator, Region, Controller, Members, Member, IndexView, ShowView, ActionsView) ->
+define ["cs!lib/mediator", "cs!lib/region", "cs!lib/controller", "cs!models/organisations", "cs!models/organisation", "cs!views/organisations/index", "cs!views/organisations/show", "cs!views/navigation/organisations/actions"], (mediator, Region, Controller, Organisations,Organisation, IndexView, ShowView, ActionsView) ->
 
-  class MembersController extends Controller
+  class OrganisationsController extends Controller
 
     initialize: ->
-      mediator.subscribe "members:search", @search, @
+      mediator.subscribe "organisations:search", @search, @
 
       @main_region = new Region({ el: "#body .content" })
       @actions_region = new Region({ el: "#body header" })
 
     index: ->
-      collection = new Members()
+      collection = new Organisations()
 
       ar = @actions_region
       mr = @main_region
@@ -20,7 +20,7 @@ define ["cs!lib/mediator", "cs!lib/region", "cs!lib/controller", "cs!models/memb
           mr.show new IndexView(collection: collection)
 
     show: (id) ->
-      model = new Member({ id: id })
+      model = new Organisation({ id: id })
 
       ar = @actions_region
       mr = @main_region
@@ -33,7 +33,7 @@ define ["cs!lib/mediator", "cs!lib/region", "cs!lib/controller", "cs!models/memb
     search: (q) ->
       return if q.length == 0
 
-      collection = new Members()
+      collection = new Organisations()
       collection.url = collection.search_url q
 
       ar = @actions_region
@@ -44,4 +44,4 @@ define ["cs!lib/mediator", "cs!lib/region", "cs!lib/controller", "cs!models/memb
           ar.show new ActionsView(query: q)
           mr.show new IndexView(collection: collection)
 
-          mediator.publish "members:searched"
+          mediator.publish "organisations:searched"

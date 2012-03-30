@@ -12,14 +12,32 @@ task "seed", [], (params) ->
 
   connect()
 
+  Group = model "group"
   User = model "user"
   Person = model "person"
 
-  system_user = new User(
-    username: "system"
+  sys = new Group(
+    name: "System"
+    code: "380800"
     email: "system@perceptal.co.uk"
+    tel: "01896 830894"
   )
-  system_user.save()
+  sys.save()
+
+  demo = new Group(
+    name: "Demo"
+    code: "999999"
+    email: "demo@perceptal.co.uk"
+    tel: "01896 830894"
+    parent_id: sys._id
+  )
+  demo.save()
+
+  root_user = new User(
+    username: "root"
+    email: "root@perceptal.co.uk"
+  )
+  root_user.save()
 
   johnny_user = new User(
     username: "johnny"
@@ -27,13 +45,14 @@ task "seed", [], (params) ->
   )
   johnny_user.save()
 
-  system = new Person(
+  root = new Person(
     first_name: "System"
     last_name: "Administrator"
-    email: "system@perceptal.co.uk"
-    user_id: system_user._id
+    email: "root@perceptal.co.uk"
+    user_id: root_user._id
+    group_id: sys._id
   )
-  system.save()
+  root.save()
 
   johnny = new Person(
     first_name: "Johnny"
@@ -45,6 +64,7 @@ task "seed", [], (params) ->
     email: "johnny@recipher.co.uk"
     tel: "07971 880871"
     user_id: johnny_user._id
+    group_id: sys._id
   )
   johnny.save(disconnect)
 
@@ -53,8 +73,9 @@ task("clean", [], (params) ->
 
   connect()
 
+  Group = model "group"
   User = model "user"
   Person = model "person"
 
-  Person.find({}).remove -> User.find({}).remove disconnect
+  Person.find({}).remove -> User.find({}).remove -> Group.find({}).remove disconnect
 )

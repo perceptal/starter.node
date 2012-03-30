@@ -1,0 +1,7 @@
+{ "menu" : [
+    { "url": "#administration/",                            "text": "All" },
+    { "url": "#administration/organisations/recent",        "text": "Recent" },
+    { "url": "#administration/organisations/favourites",    "text": "Favourites" },
+    { "url": "#administration/organisations/archived",      "text": "Archived" }
+  ]
+}
