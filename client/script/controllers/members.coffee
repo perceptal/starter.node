@@ -7,7 +7,7 @@ define [
   , "cs!views/members/index"
   , "cs!views/members/show"
   , "cs!views/navigation/actions"
-  , "text!views/navigation/members/actions.json"
+  , "text!data/navigation/members.json"
 ], (mediator, Region, Controller, Members, Member, IndexView, ShowView, ActionsView, actions) ->
 
   class MembersController extends Controller
@@ -19,39 +19,33 @@ define [
       @actions_region = new Region({ el: "#body header" })
 
     index: ->
+      self = @
       collection = new Members()
-
-      ar = @actions_region
-      mr = @main_region
 
       collection.fetch
         success: ->
-          ar.show new ActionsView({ search_for: "members", actions: actions })
-          mr.show new IndexView(collection: collection)
+          self.actions_region.show new ActionsView({ search_for: "members", actions: actions })
+          self.main_region.show new IndexView(collection: collection)
 
     show: (id) ->
+      self = @
       model = new Member({ id: id })
-
-      ar = @actions_region
-      mr = @main_region
 
       model.fetch
         success: ->
-          ar.show new ActionsView({ search_for: "members", actions: actions })
-          mr.show new ShowView(model: model)
+          self.actions_region.show new ActionsView({ search_for: "members", actions: actions })
+          self.main_region.show new ShowView(model: model)
 
     search: (q) ->
       return if q.length == 0
 
+      self = @
       collection = new Members()
       collection.url = collection.search_url q
 
-      ar = @actions_region
-      mr = @main_region
-
       collection.fetch
         success: ->
-          ar.show new ActionsView({ search_for: "members", actions: actions, query: q })
-          mr.show new IndexView(collection: collection)
+          self.actions_region.show new ActionsView({ search_for: "members", actions: actions, query: q })
+          self.main_region.show new IndexView(collection: collection)
 
           mediator.publish "members:searched"

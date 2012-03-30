@@ -7,8 +7,8 @@ define [
   , "cs!views/organisations/index"
   , "cs!views/organisations/show"
   , "cs!views/navigation/actions"
-  , "text!views/navigation/organisations/actions.json"
-], (mediator, Region, Controller, Organisations,Organisation, IndexView, ShowView, ActionsView, actions) ->
+  , "text!data/navigation/organisations.json"
+], (mediator, Region, Controller, Organisations,Organisation, IndexView, ShowView, ActionsView, menu) ->
 
   class OrganisationsController extends Controller
 
@@ -19,39 +19,33 @@ define [
       @actions_region = new Region({ el: "#body header" })
 
     index: ->
+      self = @
       collection = new Organisations()
-
-      ar = @actions_region
-      mr = @main_region
 
       collection.fetch
         success: ->
-          ar.show new ActionsView({ search_for: "organisations", actions: actions })
-          mr.show new IndexView(collection: collection)
+          self.actions_region.show new ActionsView({ search_for: "organisations", actions: menu })
+          self.main_region.show new IndexView(collection: collection)
 
     show: (id) ->
+      self = @
       model = new Organisation({ id: id })
-
-      ar = @actions_region
-      mr = @main_region
 
       model.fetch
         success: ->
-          ar.show new ActionsView({ search_for: "organisations", actions: actions })
-          mr.show new ShowView(model: model)
+          self.actions_region.show new ActionsView({ search_for: "organisations", actions: menu })
+          self.main_region.show new ShowView(model: model)
 
     search: (q) ->
       return if q.length == 0
 
+      self = @
       collection = new Organisations()
       collection.url = collection.search_url q
 
-      ar = @actions_region
-      mr = @main_region
-
       collection.fetch
         success: ->
-          ar.show new ActionsView({ search_for: "organisations", actions: actions, query: q })
-          mr.show new IndexView(collection: collection)
+          self.actions_region.show new ActionsView({ search_for: "organisations", actions: menu, query: q })
+          self.main_region.show new IndexView(collection: collection)
 
           mediator.publish "organisations:searched"

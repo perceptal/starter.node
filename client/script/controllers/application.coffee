@@ -1,10 +1,21 @@
-define ["backbone", "cs!lib/region", "cs!lib/controller", "cs!views/navigation/index", "cs!routers/home", "cs!routers/organisations", "cs!routers/members"], (Backbone, Region, Controller, NavView, HomeRouter, OrganisationsRouter, MembersRouter) ->
+define [
+    "backbone"
+  , "cs!lib/navigation"
+  , "cs!lib/controller"
+  , "cs!routers/home"
+  , "cs!routers/organisations"
+  , "cs!routers/members"
+  , "text!data/navigation/main.json"
+  , "text!data/navigation/support.json"
+  , "text!data/navigation/user.json"
+], (Backbone, Navigation, Controller, HomeRouter, OrganisationsRouter, MembersRouter, main, support, user) ->
 
   class ApplicationController extends Controller
 
     initialize: ->
-      region = new Region({ el: "nav#main" })
-      region.show new NavView()
+      new Navigation({ el: "nav#main", menu: main })
+      new Navigation({ el: "footer nav", menu: support })
+      new Navigation({ el: "#sidebar nav", menu: user })
 
       new HomeRouter()
       new OrganisationsRouter()

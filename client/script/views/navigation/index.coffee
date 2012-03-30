@@ -1,12 +1,13 @@
-define ["jquery", "cs!lib/collection_view", "hbs!templates/navigation/index", "text!./main.json"], ($, View, template, data) ->
+define ["jquery", "cs!lib/collection_view", "hbs!templates/navigation/index"], ($, View, template) ->
 
   class IndexView extends View
     tagName: "ul"
 
     initialize: ->
+      @menu = @options.menu
       @render()
 
     render: ->
-      @$el.html(template(JSON.parse(data)))
+      @$el.html(template(JSON.parse(@menu)))
 
       this

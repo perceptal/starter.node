@@ -15,6 +15,9 @@ a:hover {
   text-decoration: none;
   color: #c00;
 }
+ul {
+  list-style: none;
+}
 body,
 body.home,
 body.user {
@@ -117,7 +120,7 @@ aside#sidebar {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   float: left;
-  margin: 20px;
+  margin: 0;
   padding: 0;
   width: 20%;
 }
@@ -169,26 +172,26 @@ nav#security ul a {
 nav#security ul a:hover {
   color: #333;
 }
-nav#user a {
+aside#sidebar nav a {
   color: #777;
   padding: 4px;
   border: 1px solid transparent;
   text-decoration: none;
   font-size: 16px;
 }
-nav#user a:hover {
+aside#sidebar nav a:hover {
   color: #900;
 }
-nav#user ul {
+aside#sidebar nav ul {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  margin-top: 30px;
+  margin-top: 60px;
 }
-nav#user ul li {
+aside#sidebar nav ul li {
   margin-top: 15px;
 }
-nav#user ul li.loading {
+aside#sidebar nav ul li.loading {
   display: none;
   color: #300;
   background: transparent url("data:image/gif;base64,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") no-repeat 4px center;
@@ -209,12 +212,6 @@ nav#security ul.password li.password a,
 nav#main ul.user li.user a,
 nav#user ul.user li.user a,
 nav#security ul.user li.user a,
-nav#main ul.aboutus li.aboutus a,
-nav#user ul.aboutus li.aboutus a,
-nav#security ul.aboutus li.aboutus a,
-nav#main ul.contactus li.contactus a,
-nav#user ul.contactus li.contactus a,
-nav#security ul.contactus li.contactus a,
 nav#main ul.organisations li.organisations a,
 nav#user ul.organisations li.organisations a,
 nav#security ul.organisations li.organisations a,
@@ -229,14 +226,6 @@ nav#security ul.sessions li.sessions a {
   border-radius: 3px;
   color: #c00 !important;
   background: #eee;
-}
-footer nav ul.support li.support a,
-footer nav ul.help li.help a,
-footer nav ul.aboutus li.aboutus a,
-footer nav ul.contactus li.contactus a,
-footer nav  a {
-  color: #c00;
-  text-decoration: underline;
 }
 nav.side {
   padding: 5px 0 10px 10px;
@@ -263,6 +252,11 @@ nav.side li.active a {
   color: #900;
 }
 nav.side a {
+  color: #777;
+  padding: 4px;
+  border: 1px solid transparent;
+  text-decoration: none;
+  font-size: 16px;
   color: #333;
   padding-right: 5px;
 }
