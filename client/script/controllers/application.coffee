@@ -1,6 +1,7 @@
 define [
     "backbone"
   , "cs!lib/navigation"
+  , "cs!lib/dialog"
   , "cs!lib/controller"
   , "cs!routers/home"
   , "cs!routers/organisations"
@@ -8,7 +9,7 @@ define [
   , "text!data/navigation/main.json"
   , "text!data/navigation/support.json"
   , "text!data/navigation/user.json"
-], (Backbone, Navigation, Controller, HomeRouter, OrganisationsRouter, MembersRouter, main, support, user) ->
+], (Backbone, Navigation, Dialog, Controller, HomeRouter, OrganisationsRouter, MembersRouter, main, support, user) ->
 
   class ApplicationController extends Controller
 
@@ -16,6 +17,8 @@ define [
       new Navigation({ el: "nav#main", menu: main })
       new Navigation({ el: "footer nav", menu: support })
       new Navigation({ el: "#sidebar nav", menu: user })
+
+      new Dialog()
 
       new HomeRouter()
       new OrganisationsRouter()

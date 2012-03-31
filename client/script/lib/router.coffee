@@ -8,6 +8,7 @@ define ["underscore", "backbone", "cs!./mediator"], (_, Backbone, mediator) ->
       if @app_routes
         controller = @controller
         controller = options.controller if options and options.controller
+        controller.router = @
 
         @process_app_routes controller, @app_routes
 

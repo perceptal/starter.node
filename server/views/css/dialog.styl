@@ -1,57 +1,56 @@
 ﻿#dialog, #confirm
-	border-radius(6px)
-	position absolute
-	display none
-	z-index 999999
-	top 20%
-	left 30%
-	background #eee
-	padding 20px
-	
-	.message
-		position relative
-		padding 0 10px 0 26px
-		margin 4px
-		font-size 0.9em
+    border-radius(3px)
+    border 1px solid #ddd
+    position absolute
+    display none
+    z-index 999999
+    top 20%
+    left 30%
+    background #eee
+    padding 20px
 
-	a
-		color #900
-		cursor pointer
-		text-decoration none
-		z-index 999999
+    .message
+        position relative
+        padding 0 10px 0 26px
+        margin 4px
+    a
+        color #900
+        cursor pointer
+        text-decoration none
+        z-index 999999
 
-	a.close
-		font-size 0.8em
-		
-	a.yes, a.no
-		padding-left 10px
+    a.close
+        font-size 0.8em
+
+    a.yes, a.no
+        padding-left 10px
 			
-	a.no
-		color #777
+    a.no
+        color #777
 		
-	a.close:hover, a.yes:hover
-		color #c00
+    a.close:hover, a.yes:hover
+        color #c00
 		
-	a.no:hover
-		color #000
+    a.no:hover
+        color #000
 	
-	.questions
-		font-size 0.9em
-		margin-top 10px
-		padding-left 20px
-		
+    .questions
+        font-size 0.9em
+        margin-top 10px
+        padding-left 20px
+
 .message.information
-	background transparent url("images/info.png") no-repeat 1px 1px
-	color #006
+    background transparent url("images/info.png") no-repeat 1px 1px
+    color #006
 .message.warning
-	background transparent url("images/warning.png") no-repeat 1px 1px
-	color #300
+    background transparent url("images/warning.png") no-repeat 1px 1px
+    color #300
 .message.error
-	background transparent url("images/error.png") no-repeat 1px 1px
-	color #900
+    background transparent url("images/error.png") no-repeat 1px 1px
+    color #900
 .message.question
-	background transparent url("images/question.png") no-repeat 1px 1px
-	color #006
+    background transparent url("images/question.png") no-repeat 1px 1px
+    color #006
 .message.loading
-	background transparent url("images/loading.gif") no-repeat 1px 1px
-	color #300
+    background transparent url("images/loading.gif") no-repeat 1px 1px
+    color #300

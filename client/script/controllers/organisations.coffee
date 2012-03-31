@@ -52,3 +52,7 @@ define [
           self.main_region.show new IndexView(collection: collection)
 
           mediator.publish "organisations:searched"
+
+          self.router.navigate "organisations/search/" + q
+
+          self.warning "No matching organisations found" if collection.isEmpty()

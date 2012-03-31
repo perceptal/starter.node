@@ -18,7 +18,7 @@ PersonSchema = new Schema(
 PersonSchema.virtual("full_name").get ->
   @first_name + " " + @last_name
 
-PersonSchema.statics.search = (query, callback) ->
-  @where("first_name", new RegExp(query, "i")).run(callback)
+PersonSchema.statics.search = (query) ->
+  @where("first_name", new RegExp(query, "i"))
 
 module.exports = PersonSchema

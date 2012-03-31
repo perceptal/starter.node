@@ -53,3 +53,6 @@ define [
 
           mediator.publish "members:searched"
 
+          self.router.navigate "members/search/" + q
+
+          self.warning "No matching members found" if collection.isEmpty()

@@ -10,7 +10,7 @@ GroupSchema = new Schema(
   parent      : { type: Schema.ObjectId, ref: "group" }
 )
 
-GroupSchema.statics.search = (query, callback) ->
-  @where("name", new RegExp(query, "i")).run(callback)
+GroupSchema.statics.search = (query) ->
+  @where("name", new RegExp(query, "i"))
 
 module.exports = GroupSchema
