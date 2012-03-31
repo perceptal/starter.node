@@ -9,7 +9,7 @@ define ["jquery", "cs!lib/mediator", "cs!lib/view", "hbs!templates/navigation/ac
     events:
       "click a": "select"
 
-    search_input: -> $("." + @search_for + " input.search")
+    search_input: -> @$("." + @search_for + " input.search")
 
     initialize: ->
       @search_for = @options.search_for if @options.search_for

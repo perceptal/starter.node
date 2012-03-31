@@ -9,7 +9,7 @@ app = configure()
 ["group", "user", "person", "role"].map((name) -> model(name))
 
 # Resources
-["group", "user", "person"].map((name) -> resource(app, name))
+["group", "user", "person"].map((name) -> resource.map(app, name))
 
 # Controllers
 ["home"].map((name) -> controller(app, name))

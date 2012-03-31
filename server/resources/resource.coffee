@@ -1,4 +1,9 @@
-module.exports = (app, name) ->
-  model = require("mongoose").model(name)
+mongoose = require "mongoose"
+
+module.exports.map = (app, name) ->
+  model = mongoose.model(name)
 
   require("./" + name)(app, model)
+
+
+

@@ -7,7 +7,7 @@ GroupSchema = new Schema(
   code        : { type: String, required: true, unique: true }
   email       : { type: String, required: true, unique: true, lowercase: true }
   tel         : { type: String }
-  parent_id   : { type: Schema.ObjectId }
+  parent      : { type: Schema.ObjectId, ref: "group" }
 )
 
 GroupSchema.statics.search = (query, callback) ->
