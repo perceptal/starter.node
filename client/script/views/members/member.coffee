@@ -1,10 +1,18 @@
-define ["jquery", "cs!lib/view", "hbs!templates/members/member"], ($, View, template) ->
+define ["jquery", "cs!lib/mediator", "cs!lib/view", "hbs!templates/members/member"], ($, mediator, View, template) ->
 
   class MemberView extends View
     tagName: "article"
     className: "list"
 
+    events:
+      "click":          "select"
+      "click a.select": "select"
+
     render: ->
       @$el.html(template(@model.toJSON()))
 
       this
+
+    select: ->
+      mediator.publish "member:select", @model.attributes._id
+

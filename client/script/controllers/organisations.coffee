@@ -16,6 +16,7 @@ define [
       @name = "organisations"
 
       mediator.subscribe "organisations:search", @search, @
+      mediator.subscribe "organisation:select", @show, @
 
       @main_region = new Region({ el: "#body .content" })
       @actions_region = new Region({ el: "#body header" })

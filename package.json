@@ -17,6 +17,6 @@
   , "sinon": "*"
   },
   "scripts": {
-    "test": "NODE_ENV=test mocha test/server/*/*.coffee -R list"
+    "test": "NODE_ENV=test mocha test/*/*.coffee -R list"
   }
 }

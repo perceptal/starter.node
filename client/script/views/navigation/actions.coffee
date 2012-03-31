@@ -6,6 +6,9 @@ define ["jquery", "cs!lib/mediator", "cs!lib/view", "hbs!templates/navigation/ac
 
     query: ""
 
+    events:
+      "click a": "select"
+
     search_input: -> $("." + @search_for + " input.search")
 
     initialize: ->
@@ -30,14 +33,20 @@ define ["jquery", "cs!lib/mediator", "cs!lib/view", "hbs!templates/navigation/ac
 
       @search_input().bind "keyup", -> self.search $(@)
 
+    select: (e) ->
+      $link = $ e.currentTarget
+
+      @$el.find("a").removeClass "active"
+
+      $link.addClass "active"
+
     search: ($input) ->
       q = $input.val()
+      @$el.find("a").removeClass "active"
 
       mediator.publish @search_for + ":search", q
 
     focus: ->
-
-      console.log @
       $search = @search_input()
       $search.focus()
       $search.val($search.val())

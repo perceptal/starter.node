@@ -8,7 +8,7 @@ define ["jquery", "cs!lib/view", "hbs!templates/navigation/index"], ($, View, te
 
     initialize: ->
       @menu = @options.menu
-      
+
       @render()
 
     render: ->

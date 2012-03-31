@@ -255,36 +255,39 @@ nav.secondary {
   margin-bottom: 10px;
   padding: 6px 0;
 }
-nav.secondary a {
-  color: #777;
-  padding: 4px;
-  border: 1px solid transparent;
-  text-decoration: none;
-  font-size: 16px;
-  font-size: 16px;
-}
-nav.secondary a:hover {
-  color: #900;
-}
 nav.secondary ul,
 nav.secondary li {
   display: inline;
   padding: 0;
   margin: 0;
 }
-nav.secondary li {
-  padding-left: 10px;
-}
 nav.secondary ul {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-nav.secondary li.active a {
-  color: #c00;
+nav.secondary li {
+  padding-left: 10px;
 }
-nav.secondary li.active a:after {
-  content: " \2192";
+nav.secondary li a {
+  color: #777;
+  padding: 4px;
+  border: 1px solid transparent;
+  text-decoration: none;
+  font-size: 16px;
+  font-size: 16px;
+  padding: 2px 6px;
+}
+nav.secondary li a:hover {
+  color: #900;
+}
+nav.secondary li a.active {
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  border: 1px solid #ddd;
+  background: #fff;
+  color: #900;
 }
 nav.secondary input.search {
   -webkit-border-radius: 3px;
