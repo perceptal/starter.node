@@ -4,7 +4,7 @@ define ["cs!./mediator"], (mediator) ->
     # The subscriptions storage
     global_subscriptions: null
 
-    subscribe_event: (type, handler) ->
+    subscribe_event: (type, handler, context) ->
       @global_subscriptions or= {}
 
       # Add to store
@@ -13,7 +13,7 @@ define ["cs!./mediator"], (mediator) ->
       handlers.push handler
 
       # Register global handler
-      mediator.subscribe type, handler, this
+      mediator.subscribe type, handler, context or= @
 
     unsubscribe_event: (type, handler) ->
       return unless @global_subscriptions

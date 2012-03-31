@@ -1,4 +1,4 @@
-define ["jquery", "cs!lib/mediator", "cs!lib/collection_view", "hbs!templates/navigation/actions"], ($, mediator, View, template) ->
+define ["jquery", "cs!lib/mediator", "cs!lib/view", "hbs!templates/navigation/actions"], ($, mediator, View, template) ->
 
   class ActionsView extends View
     tagName: "nav"
@@ -15,6 +15,8 @@ define ["jquery", "cs!lib/mediator", "cs!lib/collection_view", "hbs!templates/na
       @className += @search_for
 
       mediator.subscribe @search_for + ":searched", @focus, @
+
+      #@subscribe_event @search_for + ":searched", @focus, @
 
       @render()
 
@@ -34,6 +36,8 @@ define ["jquery", "cs!lib/mediator", "cs!lib/collection_view", "hbs!templates/na
       mediator.publish @search_for + ":search", q
 
     focus: ->
+
+      console.log @
       $search = @search_input()
       $search.focus()
       $search.val($search.val())

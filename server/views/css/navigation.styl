@@ -6,7 +6,7 @@ nav()
     font-size 16px
 
 selected()
-    box-shadow(0.2)
+    box-shadow(rgba(0, 0, 0, 0.3) 0 1px #888)
     border-radius(3px)
     color #c00 !important
     background #eee
@@ -60,15 +60,8 @@ aside#sidebar nav
             loading()
 
 nav#main, nav#user, nav#security
-    ul.home li.home,
-    ul.settings li.settings,
-    ul.profile li.profile,
-    ul.password li.password,
-    ul.user li.user,
-    ul.organisations li.organisations,
-    ul.sessions li.sessions
-        a
-            selected()
+    a.active
+        selected()
 
 nav.side
     padding 5px 0 10px 10px

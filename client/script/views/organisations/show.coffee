@@ -1,4 +1,4 @@
-define ["jquery", "cs!lib/item_view", "cs!./organisation"], ($, View, OrgView) ->
+define ["jquery", "cs!lib/view", "cs!./organisation"], ($, View, OrgView) ->
 
   class ShowView extends View
     initialize: ->

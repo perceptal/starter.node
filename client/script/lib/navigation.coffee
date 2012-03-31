@@ -9,8 +9,5 @@ define ["underscore", "cs!./region", "cs!views/navigation/index"], (_, Region, V
       @render()
 
     render: ->
-      console.log @menu
-      console.log @el
-
       region = new Region(el: @el)
       region.show new View(menu: @menu)

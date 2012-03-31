@@ -1,4 +1,4 @@
-define ["underscore", "backbone", "cs!./subscriber"], (_, Backbone, Subscriber) ->
+define ["underscore", "backbone", "cs!./mediator"], (_, Backbone, mediator) ->
 
   class Router extends Backbone.Router
 
@@ -27,5 +27,6 @@ define ["underscore", "backbone", "cs!./subscriber"], (_, Backbone, Subscriber) 
 
         router.route route, method_name, method
 
-        i++
+        #mediator.publish ["navigate", controller.name, method_name].join ":"
 
+        i++

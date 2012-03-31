@@ -13,6 +13,8 @@ define [
   class OrganisationsController extends Controller
 
     initialize: ->
+      @name = "organisations"
+
       mediator.subscribe "organisations:search", @search, @
 
       @main_region = new Region({ el: "#body .content" })

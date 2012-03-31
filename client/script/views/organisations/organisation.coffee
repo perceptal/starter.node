@@ -1,4 +1,4 @@
-define ["jquery", "cs!lib/item_view", "hbs!templates/organisations/organisation"], ($, View, template) ->
+define ["jquery", "cs!lib/view", "hbs!templates/organisations/organisation"], ($, View, template) ->
 
   class OrgView extends View
     tagName: "article"

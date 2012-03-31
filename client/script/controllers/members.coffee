@@ -13,6 +13,8 @@ define [
   class MembersController extends Controller
 
     initialize: ->
+      @name = "members"
+
       mediator.subscribe "members:search", @search, @
 
       @main_region = new Region({ el: "#body .content" })
@@ -49,3 +51,4 @@ define [
           self.main_region.show new IndexView(collection: collection)
 
           mediator.publish "members:searched"
+

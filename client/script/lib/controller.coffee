@@ -4,6 +4,8 @@ define ["underscore", "cs!./subscriber"], (_, Subscriber) ->
 
     _(Controller.prototype).defaults Subscriber
 
+    name: null
+
     constructor: ->
       @initialize()
 
