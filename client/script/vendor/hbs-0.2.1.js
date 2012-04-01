@@ -287,7 +287,7 @@ Handlebars, _, precompile, JSON
                         vars = extDeps.vars,
                         helps = extDeps.helpers || [],
                         depStr = deps.join("', 'hbs!").replace(/_/g, '/'),
-                        helpDepStr = helps.join("', 'template/helpers/"),
+                        helpDepStr = helps.join("', 'templates/helpers/"),
                         debugOutputStart = "",
                         debugOutputEnd   = "",
                         debugProperties = "",
@@ -298,7 +298,7 @@ Handlebars, _, precompile, JSON
                         depStr = ",'hbs!" + depStr + "'";
                     }
                     if ( helpDepStr ) {
-                        helpDepStr = ",'template/helpers/" + helpDepStr + "'";
+                        helpDepStr = ",'templates/helpers/" + helpDepStr + "'";
                     }
 
 

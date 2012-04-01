@@ -4,6 +4,7 @@ require.config({
 , hbs: {
     templateExtension: "hbs"
   , disableI18n: true
+  , helperPathCallback: function(name) { "cs!/templates/helpers/" + name; }
   }
 
 , paths: {

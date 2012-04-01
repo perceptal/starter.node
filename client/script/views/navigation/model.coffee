@@ -1,10 +1,12 @@
 define [
     "jquery"
+  , "Handlebars"
   , "cs!lib/mediator"
+  , "cs!lib/util"
   , "cs!lib/timer"
   , "cs!lib/view"
   , "hbs!templates/navigation/model"
-], ($, mediator, timer, View, template) ->
+], ($, Handlebars, mediator, util, timer, View, template) ->
 
   class ModelView extends View
     tagName: "nav"
@@ -18,10 +20,12 @@ define [
     initialize: ->
       @menu = @options.menu if @options.menu
 
+      @menu = util.inject @menu, "menu", "id", @model.id
+
       @render()
 
     render: ->
-      @$el.html(template({ menu: JSON.parse(@menu) }))
+      @$el.html(template({ id: @model.id, menu: JSON.parse(@menu) }))
 
       @
 
