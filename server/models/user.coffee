@@ -16,4 +16,7 @@ hash = (password, salt) ->
 UserSchema.methods.set_password = (password) ->
   @hashed_password = hash(passwordString, @salt)
 
+UserSchema.methods.authenticate = (password) ->
+  @hashed_password == hash(password, @salt)
+
 module.exports = UserSchema
