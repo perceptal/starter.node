@@ -7,7 +7,7 @@ define ["jquery", "backbone"], ($, Backbone) ->
     open: (view) ->
       view.render()
 
-      @$el.html(view.el)
+      @$el[@method or= "html"](view.el)
 
       view.on_show() if view.on_show
 

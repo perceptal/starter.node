@@ -1,0 +1,6 @@
+{ "menu" : [
+    { "url": "#administration/organisations/{{id}}",            "text": "Information",  "classifier": "page" }
+  , { "url": "#administration/organisations/{{id}}/groups",     "text": "Groups",       "classifier": "page" }
+  , { "url": "#administration/organisations/{{id}}/security",   "text": "Security",     "classifier": "page" }
+  ]
+}

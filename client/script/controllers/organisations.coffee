@@ -1,19 +1,24 @@
 define [
-  "cs!lib/mediator"
+    "cs!lib/mediator"
   , "cs!lib/region"
   , "cs!lib/controller"
   , "cs!models/organisations"
   , "cs!models/organisation"
   , "cs!views/organisations/index"
   , "cs!views/organisations/show"
-  , "cs!views/navigation/actions"
+  , "cs!views/navigation/collection"
+  , "cs!views/navigation/model"
   , "text!data/navigation/organisations.json"
-], (mediator, Region, Controller, Organisations, Organisation, IndexView, ShowView, ActionsView, actions) ->
+  , "text!data/navigation/organisation.json"
+], (mediator, Region, Controller, Organisations, Organisation, IndexView, ShowView, CollectionMenuView, ModelMenuView, organisations, organisation) ->
 
   class OrganisationsController extends Controller
 
-    actions: (q) ->
-      @actions_region.show new ActionsView({ search_for: "organisations", actions: actions, query: q or= "" })
+    collection_menu: (q) ->
+      @collection_menu_region.show new CollectionMenuView({ collection_name: @name, menu: organisations, query: q or= "" })
+
+    model_menu: (model) ->
+      @model_menu_region.show new ModelMenuView({ model: model, menu: organisation })
 
     initialize: ->
       @name = "organisations"
@@ -22,7 +27,8 @@ define [
       mediator.subscribe "organisations:select", @show, @
 
       @main_region = new Region({ el: "#body .content" })
-      @actions_region = new Region({ el: "#body header" })
+      @collection_menu_region = new Region({ el: "#body header" })
+      @model_menu_region = new Region({ el: "#body .content", method: "append" })
 
     index: ->
       self = @
@@ -36,7 +42,7 @@ define [
           self.error res.responseText
 
         complete: ->
-          self.actions()
+          self.collection_menu()
 
     show: (id) ->
       self = @
@@ -45,6 +51,7 @@ define [
       model.fetch
         success: ->
           self.main_region.show new ShowView(model: model)
+          self.model_menu model
 
           self.router.navigate "administration/organisations/" + id
 
@@ -52,7 +59,7 @@ define [
           self.error res.responseText
 
         complete: ->
-          self.actions()
+          self.collection_menu()
 
     search: (q) ->
       return if q.length == 0
@@ -71,6 +78,6 @@ define [
           self.error res.responseText
 
         complete: ->
-          self.actions(q)
+          self.collection_menu(q)
           self.router.navigate "administration/organisations/search/" + q
           mediator.publish "organisations:searched"

@@ -3,34 +3,34 @@ define [
   , "cs!lib/mediator"
   , "cs!lib/timer"
   , "cs!lib/view"
-  , "hbs!templates/navigation/actions"
+  , "hbs!templates/navigation/collection"
 ], ($, mediator, timer, View, template) ->
 
-  class ActionsView extends View
+  class CollectionView extends View
     tagName: "nav"
-    className: "secondary "
+    className: "collection "
 
     query: ""
 
     events:
       "click a": "select"
 
-    search_input: -> @$("." + @search_for + " input.search")
+    search_input: -> @$("." + @collection_name + " input.search")
 
     initialize: ->
-      @search_for = @options.search_for if @options.search_for
+      @collection_name = @options.collection_name if @options.collection_name
       @query = @options.query if @options.query
-      @actions = @options.actions if @options.actions
-      @className += @search_for
+      @menu = @options.menu if @options.menu
+      @className += @collection_name
 
-      mediator.subscribe @search_for + ":searched", @focus, @
+      mediator.subscribe @collection_name + ":searched", @focus, @
 
-      #@subscribe_event @search_for + ":searched", @focus, @
+      #@subscribe_event @collection_name + ":searched", @focus, @
 
       @render()
 
     render: ->
-      @$el.html(template({ search_for: @search_for, q: @query, actions: JSON.parse(@actions) }))
+      @$el.html(template({ collection_name: @collection_name, q: @query, menu: JSON.parse(@menu) }))
 
       @
 
@@ -52,7 +52,7 @@ define [
 
       @$el.find("a").removeClass "active"
 
-      mediator.publish @search_for + ":search", q
+      mediator.publish @collection_name + ":search", q
 
     focus: ->
       $search = @search_input()

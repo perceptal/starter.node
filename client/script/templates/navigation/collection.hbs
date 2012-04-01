@@ -1,0 +1,8 @@
+<ul>
+    <li class=" {{collection_name}}">
+        <input class="search" placeholder="Search for {{collection_name}}&rarr;" type="text" value="{{q}}" />
+    </li>
+{{#each menu.menu}}
+    <li class="{{classifier}}"><a href="{{url}}/">{{text}}</a></li>
+{{/each}}
+</ul>
