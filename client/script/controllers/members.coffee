@@ -27,17 +27,30 @@ define [
 
       collection.fetch
         success: ->
-          self.actions_region.show new ActionsView({ search_for: "members", actions: actions })
           self.main_region.show new IndexView(collection: collection)
 
+        error: (collection, res) ->
+          self.error res.responseText
+
+        complete: ->
+          self.actions_region.show new ActionsView({ search_for: "members", actions: actions })
+
     show: (id) ->
+
       self = @
       model = new Member({ id: id })
 
       model.fetch
         success: ->
-          self.actions_region.show new ActionsView({ search_for: "members", actions: actions })
           self.main_region.show new ShowView(model: model)
+
+          self.router.navigate "members/" + id
+
+        error: (model, res) ->
+          self.error res.responseText
+
+        complete: ->
+          self.actions_region.show new ActionsView({ search_for: "members", actions: actions })
 
     search: (q) ->
       return if q.length == 0
@@ -48,11 +61,16 @@ define [
 
       collection.fetch
         success: ->
-          self.actions_region.show new ActionsView({ search_for: "members", actions: actions, query: q })
           self.main_region.show new IndexView(collection: collection)
 
           mediator.publish "members:searched"
 
           self.router.navigate "members/search/" + q
 
-          self.warning "No matching members found" if collection.isEmpty()
+          self.warning "No members found" if collection.isEmpty()
+
+        error: (collection, res) ->
+          self.error res.responseText
+
+        complete: ->
+          self.actions_region.show new ActionsView({ search_for: "members", actions: actions })

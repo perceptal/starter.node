@@ -1,4 +1,4 @@
-define ["jquery", "cs!lib/mediator", "cs!lib/view", "hbs!templates/shared/confirm"], ($, mediator, View, template) ->
+define ["jquery", "cs!lib/mediator", "cs!lib/util", "cs!lib/view", "hbs!templates/shared/confirm"], ($, mediator, util, View, template) ->
 
   class ConfirmView extends View
     tagName: "span"
@@ -8,27 +8,32 @@ define ["jquery", "cs!lib/mediator", "cs!lib/view", "hbs!templates/shared/confir
       "click a.no":   "close"
 
     callback: null
-    message:  "Are you sure?"
+    context:  null
+    question: "Are you sure?"
     y:        "yes"
     n:        "no"
 
     initialize: ->
       @callback = @options.callback
-      @message = @options.message if @options.message
+      @context = @options.context
+      @question = @options.question if @options.question
       @y = @options.yes if @options.yes
       @n = @options.no if @options.no
 
+      @render()
+
     render: ->
-      @$el.html(template({ message: @message, yes: @y, no: @n }))
+      @$el.html(template({ question: @question, yes: @y, no: @n }))
 
       this
 
     on_show: ->
-      @centre()
+      util.centre(@$el.parent())
       @$el.parent().fadeIn 500
 
     confirm: ->
-      callback()
+      @callback.apply @context, @callback.arguments
+      @close()
 
       mediator.publish "confirmed"
 
@@ -38,11 +43,3 @@ define ["jquery", "cs!lib/mediator", "cs!lib/view", "hbs!templates/shared/confir
       @unbind()
 
       mediator.publish "confirm:closed"
-
-    centre: ->
-      $el = @$el.parent()
-      $el.css
-        top: ($(window).scrollTop() + 175) + "px"
-        left: "50%"
-        margin: "-" + ($el.height() / 2) + "px 0 0 -" + ($el.width() / 2) + "px"
-

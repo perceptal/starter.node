@@ -1,5 +1,5 @@
 define [
-    "cs!lib/mediator"
+  "cs!lib/mediator"
   , "cs!lib/region"
   , "cs!lib/controller"
   , "cs!models/organisations"
@@ -8,7 +8,7 @@ define [
   , "cs!views/organisations/show"
   , "cs!views/navigation/actions"
   , "text!data/navigation/organisations.json"
-], (mediator, Region, Controller, Organisations,Organisation, IndexView, ShowView, ActionsView, menu) ->
+], (mediator, Region, Controller, Organisations, Organisation, IndexView, ShowView, ActionsView, actions) ->
 
   class OrganisationsController extends Controller
 
@@ -27,17 +27,30 @@ define [
 
       collection.fetch
         success: ->
-          self.actions_region.show new ActionsView({ search_for: "organisations", actions: menu })
           self.main_region.show new IndexView(collection: collection)
 
+        error: (collection, res) ->
+          self.error res.responseText
+
+        complete: ->
+          self.actions_region.show new ActionsView({ search_for: "organisations", actions: actions })
+
     show: (id) ->
+
       self = @
       model = new Organisation({ id: id })
 
       model.fetch
         success: ->
-          self.actions_region.show new ActionsView({ search_for: "organisations", actions: menu })
           self.main_region.show new ShowView(model: model)
+
+          self.router.navigate "organisations/" + id
+
+        error: (model, res) ->
+          self.error res.responseText
+
+        complete: ->
+          self.actions_region.show new ActionsView({ search_for: "organisations", actions: actions })
 
     search: (q) ->
       return if q.length == 0
@@ -48,11 +61,16 @@ define [
 
       collection.fetch
         success: ->
-          self.actions_region.show new ActionsView({ search_for: "organisations", actions: menu, query: q })
           self.main_region.show new IndexView(collection: collection)
 
           mediator.publish "organisations:searched"
 
           self.router.navigate "organisations/search/" + q
 
-          self.warning "No matching organisations found" if collection.isEmpty()
+          self.warning "No organisations found" if collection.isEmpty()
+
+        error: (collection, res) ->
+          self.error res.responseText
+
+        complete: ->
+          self.actions_region.show new ActionsView({ search_for: "organisations", actions: actions })

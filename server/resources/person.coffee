@@ -11,7 +11,10 @@ module.exports = (app, Person) ->
   app.get "/people/:id", anonymous, (req, res) ->
 
     Person.findById(req.params.id).populate("user").populate("group").run((err, person) ->
-      res.json person
+      if err
+        res.send "Person not found", 404
+      else
+        res.json person
     )
 
   app.get "/people/search/:q", anonymous, (req, res) ->

@@ -3,7 +3,7 @@ define [
   , "cs!./region"
   , "cs!views/shared/dialog"
   , "cs!views/shared/confirm"
-], (mediator, Region, Dialog, Confirm) ->
+], (mediator, Region, DialogView, ConfirmView) ->
 
   class Dialog
 
@@ -31,7 +31,7 @@ define [
       @dialog message, "loading"
 
     dialog: (message, type) ->
-      @region.show new Dialog({ message: message, type: type })
+      @region.show new DialogView({ message: message, type: type })
 
-    confirm: (callback, message, y, n) ->
-      @region.show new Confirm({ message: message, yes: y, no: n, callback: callback })
+    confirm: (callback, context, question, y, n) ->
+      @region.show new ConfirmView({ question: question, context: context, yes: y, no: n, callback: callback })

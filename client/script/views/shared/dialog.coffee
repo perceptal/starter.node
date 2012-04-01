@@ -1,4 +1,4 @@
-define ["jquery", "cs!lib/mediator", "cs!lib/view", "hbs!templates/shared/dialog"], ($, mediator, View, template) ->
+define ["jquery", "cs!lib/mediator", "cs!lib/util", "cs!lib/view", "hbs!templates/shared/dialog"], ($, mediator, util, View, template) ->
 
   class DialogView extends View
     tagName: "span"
@@ -13,13 +13,15 @@ define ["jquery", "cs!lib/mediator", "cs!lib/view", "hbs!templates/shared/dialog
       @message = @options.message
       @type = @options.type
 
+      @render()
+
     render: ->
       @$el.html(template({ message: @message, type: @type }))
 
       this
 
     on_show: ->
-      @centre()
+      util.centre(@$el.parent())
       @$el.parent().fadeIn 500
 
     close: ->
@@ -28,11 +30,3 @@ define ["jquery", "cs!lib/mediator", "cs!lib/view", "hbs!templates/shared/dialog
       @unbind()
 
       mediator.publish "dialog:closed"
-
-    centre: ->
-      $el = @$el.parent()
-      $el.css
-        top: ($(window).scrollTop() + 175) + "px"
-        left: "50%"
-        margin: "-" + ($el.height() / 2) + "px 0 0 -" + ($el.width() / 2) + "px"
-

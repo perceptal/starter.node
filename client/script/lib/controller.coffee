@@ -27,8 +27,8 @@ define ["underscore", "cs!./mediator", "cs!./subscriber"], (_, mediator, Subscri
     loading: (message) ->
       mediator.publish "loading", message or= "Loading..."
 
-    confirm: (callback, message, y, n) ->
-      mediator.publish "confirm", callback, message or= "Are you sure?", y or= "yes", n or= "no"
+    confirm: (callback, context, question, y, n) ->
+      mediator.publish "confirm", callback, context, question or= "Are you sure?", y or= "yes", n or= "no"
 
     disposed: false
 

@@ -11,7 +11,10 @@ module.exports = (app, Group) ->
   app.get "/organisations/:id", anonymous, (req, res) ->
 
     Group.findById(req.params.id).populate("parent").run((err, group) ->
-      res.json group
+      if err
+        res.send "Organisation not found", 404
+      else
+        res.json group
     )
 
   app.get "/organisations/search/:q", anonymous, (req, res) ->
