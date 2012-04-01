@@ -38,8 +38,8 @@ define ["jquery", "cs!lib/mediator", "cs!lib/util", "cs!lib/view", "hbs!template
       mediator.publish "confirmed"
 
     close: ->
-      @$el.parent().hide()
-      @remove()
-      @unbind()
+      @$el.parent().fadeOut 250, ->
+        @remove()
+        @unbind()
 
       mediator.publish "confirm:closed"

@@ -1,4 +1,10 @@
-define ["jquery", "cs!lib/mediator", "cs!lib/view", "hbs!templates/navigation/actions"], ($, mediator, View, template) ->
+define [
+    "jquery"
+  , "cs!lib/mediator"
+  , "cs!lib/timer"
+  , "cs!lib/view"
+  , "hbs!templates/navigation/actions"
+], ($, mediator, timer, View, template) ->
 
   class ActionsView extends View
     tagName: "nav"
@@ -31,17 +37,19 @@ define ["jquery", "cs!lib/mediator", "cs!lib/view", "hbs!templates/navigation/ac
     on_show: ->
       self = @
 
-      @search_input().bind "keyup", -> self.search $(@)
+      @search_input().bind "keyup", -> timer.delay(500, self.search, self)
 
     select: (e) ->
       $link = $ e.currentTarget
 
       @$el.find("a").removeClass "active"
+      @search_input().addClass("searching")
 
       $link.addClass "active"
 
-    search: ($input) ->
-      q = $input.val()
+    search: ->
+      q = @search_input().val()
+
       @$el.find("a").removeClass "active"
 
       mediator.publish @search_for + ":search", q

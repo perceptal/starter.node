@@ -12,11 +12,14 @@ define [
 
   class OrganisationsController extends Controller
 
+    actions: (q) ->
+      @actions_region.show new ActionsView({ search_for: "organisations", actions: actions, query: q or= "" })
+
     initialize: ->
       @name = "organisations"
 
       mediator.subscribe "organisations:search", @search, @
-      mediator.subscribe "organisation:select", @show, @
+      mediator.subscribe "organisations:select", @show, @
 
       @main_region = new Region({ el: "#body .content" })
       @actions_region = new Region({ el: "#body header" })
@@ -33,24 +36,23 @@ define [
           self.error res.responseText
 
         complete: ->
-          self.actions_region.show new ActionsView({ search_for: "organisations", actions: actions })
+          self.actions()
 
     show: (id) ->
-
       self = @
-      model = new Organisation({ id: id })
+      model = new Organisation({ _id: id })
 
       model.fetch
         success: ->
           self.main_region.show new ShowView(model: model)
 
-          self.router.navigate "organisations/" + id
+          self.router.navigate "administration/organisations/" + id
 
         error: (model, res) ->
           self.error res.responseText
 
         complete: ->
-          self.actions_region.show new ActionsView({ search_for: "organisations", actions: actions })
+          self.actions()
 
     search: (q) ->
       return if q.length == 0
@@ -63,14 +65,12 @@ define [
         success: ->
           self.main_region.show new IndexView(collection: collection)
 
-          mediator.publish "organisations:searched"
-
-          self.router.navigate "organisations/search/" + q
-
           self.warning "No organisations found" if collection.isEmpty()
 
         error: (collection, res) ->
           self.error res.responseText
 
         complete: ->
-          self.actions_region.show new ActionsView({ search_for: "organisations", actions: actions })
+          self.actions(q)
+          self.router.navigate "administration/organisations/search/" + q
+          mediator.publish "organisations:searched"

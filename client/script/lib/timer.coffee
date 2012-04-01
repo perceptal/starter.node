@@ -6,10 +6,11 @@ define ->
         window.clearTimeout timer
         timer = null;
 
-    delay: (timeout, callback) ->
+    delay: (timeout, callback, context) ->
       @cancel()
 
       timer = window.setTimeout ->
         timer = null
-        callback()
+
+        callback.apply context, callback.arguments
       , timeout

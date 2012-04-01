@@ -15,9 +15,6 @@ PersonSchema = new Schema(
   group       : { type: Schema.ObjectId , ref: "group" }
 )
 
-PersonSchema.virtual("full_name").get ->
-  @first_name + " " + @last_name
-
 PersonSchema.statics.search = (query) ->
   @where("first_name", new RegExp(query, "i"))
 

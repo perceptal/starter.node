@@ -14,4 +14,4 @@ define ["jquery", "cs!lib/mediator", "cs!lib/view", "hbs!templates/organisations
       this
 
     select: ->
-      mediator.publish "organisation:select", @model.attributes._id
+      mediator.publish "organisations:select", @model.id

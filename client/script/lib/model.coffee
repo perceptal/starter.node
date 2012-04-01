@@ -4,6 +4,8 @@ define ["underscore", "backbone", "cs!./subscriber"], (_, Backbone, Subscriber) 
 
     _(Model.prototype).defaults Subscriber
 
+    idAttribute: "_id"
+
     log: ->
       console.log arguments
 

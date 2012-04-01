@@ -3,5 +3,6 @@
   , { "url": "#members/recent",     "text": "Recent" }
   , { "url": "#members/favourites", "text": "Favourites" }
   , { "url": "#members/archived",   "text": "Archived" }
+  , { "url": "#members/new",        "text": "Register", "classifier": "action" }
   ]
 }

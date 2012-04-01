@@ -1,4 +1,11 @@
-define ["jquery", "cs!lib/mediator", "cs!lib/util", "cs!lib/view", "hbs!templates/shared/dialog"], ($, mediator, util, View, template) ->
+define [
+    "jquery"
+  , "cs!lib/mediator"
+  , "cs!lib/timer"
+  , "cs!lib/util"
+  , "cs!lib/view"
+  , "hbs!templates/shared/dialog"
+], ($, mediator, timer, util, View, template) ->
 
   class DialogView extends View
     tagName: "span"
@@ -24,9 +31,11 @@ define ["jquery", "cs!lib/mediator", "cs!lib/util", "cs!lib/view", "hbs!template
       util.centre(@$el.parent())
       @$el.parent().fadeIn 500
 
+      timer.delay 10000, @close, @ unless @type == "loading"
+
     close: ->
-      @$el.parent().hide()
-      @remove()
-      @unbind()
+      @$el.parent().fadeOut 250, ->
+        @remove()
+        @unbind()
 
       mediator.publish "dialog:closed"
