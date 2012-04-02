@@ -63,40 +63,13 @@ nav#main, nav#user, nav#security
     a.active
         selected()
 
-nav.model
-    padding 5px 0 10px 10px
-    text-align right
-    height 100%
-    font-size 0.8em
-
-    ul.pages, ul.actions
-        margin-bottom 30px
-
-    li
-        border-left-radius (3px)
-        border 1px solid transparent
-        border-right none
-        margin-bottom 5px
-        padding 8px
-    li.active
-        background #eee
-        border-color #ddd
-        a
-            color #900
-    a
-        nav()
-        color #333
-        padding-right 5px
-    a:hover
-        color #c00
-
-nav.collection
+nav.collection, nav.model
     border-radius(3px)
     background #eee
     border 1px solid #ddd
     margin 0
     margin-bottom 10px
-    padding 6px 0
+    padding 7px 0 4px 0
 
     ul, li
         display inline
@@ -142,6 +115,20 @@ nav.collection
 
     input.search.searching
         background #fff url("images/loading.gif") no-repeat 8px center
+
+nav.model
+    width 100%
+    background transparent !important
+    border-radius(0) !important
+    border none
+    border-bottom 1px solid #ddd
+    li
+        a
+            border none
+            font-size 0.9em !important
+        a.active
+            border none
+            color #900
 
 footer nav
     display inline

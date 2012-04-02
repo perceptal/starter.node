@@ -31,10 +31,13 @@ define [
 
     render: ->
       @$el.html(template({ collection_name: @collection_name, q: @query, menu: JSON.parse(@menu) }))
+      @$el.hide()
 
       @
 
     on_show: ->
+      @$el.fadeIn 500
+
       self = @
 
       @search_input().bind "keyup", -> timer.delay(500, self.search, self)

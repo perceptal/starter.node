@@ -12,8 +12,6 @@ define [
     tagName: "nav"
     className: "model "
 
-    query: ""
-
     events:
       "click a": "select"
 
@@ -26,15 +24,14 @@ define [
 
     render: ->
       @$el.html(template({ id: @model.id, menu: JSON.parse(@menu) }))
+      @$el.hide()
 
       @
 
     on_show: ->
-      self = @
+      @$el.fadeIn 500
 
     select: (e) ->
       $link = $ e.currentTarget
-
       @$el.find("a").removeClass "active"
-
       $link.addClass "active"

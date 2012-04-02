@@ -13,8 +13,12 @@ define ["jquery", "cs!lib/view", "hbs!templates/navigation/index"], ($, View, te
 
     render: ->
       @$el.html(template(JSON.parse(@menu)))
+      @$el.hide()
 
       this
+
+    on_show: ->
+      @$el.fadeIn 500
 
     select: (e) ->
       $link = $ e.currentTarget
