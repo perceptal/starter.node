@@ -22,6 +22,7 @@ define [
 
     initialize: ->
       @name = "organisations"
+      @collection = new Organisations()
 
       mediator.subscribe "organisations:search", @search, @
       mediator.subscribe "organisations:select", @show, @
@@ -32,13 +33,14 @@ define [
 
     index: ->
       self = @
-      collection = new Organisations()
 
-      collection.fetch
+      @collection.url = @collection.urlRoot
+
+      @collection.fetch
         success: ->
-          self.main_region.show new IndexView(collection: collection)
+          self.main_region.show new IndexView(collection: self.collection)
 
-        error: (collection, res) ->
+        error: (data, res) ->
           self.error res.responseText
 
         complete: ->
@@ -65,19 +67,19 @@ define [
       return if q.length == 0
 
       self = @
-      collection = new Organisations()
-      collection.url = collection.search_url q
+      @collection.url = @collection.search_url q
 
-      collection.fetch
+      @collection.fetch
         success: ->
-          self.main_region.show new IndexView(collection: collection)
+          self.main_region.show new IndexView(collection: self.collection)
 
-          self.warning "No organisations found" if collection.isEmpty()
+          self.warning "No organisations found" if self.collection.isEmpty()
 
-        error: (collection, res) ->
+        error: (data, res) ->
           self.error res.responseText
 
         complete: ->
           self.collection_menu(q)
           self.router.navigate "administration/organisations/search/" + q
+
           mediator.publish "organisations:searched"

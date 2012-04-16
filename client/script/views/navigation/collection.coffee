@@ -31,13 +31,10 @@ define [
 
     render: ->
       @$el.html(template({ collection_name: @collection_name, q: @query, menu: JSON.parse(@menu) }))
-      @$el.hide()
 
       @
 
     on_show: ->
-      @$el.fadeIn 500
-
       self = @
 
       @search_input().bind "keyup", -> timer.delay(500, self.search, self)
@@ -46,7 +43,6 @@ define [
       $link = $ e.currentTarget
 
       @$el.find("a").removeClass "active"
-      @search_input().addClass("searching")
 
       $link.addClass "active"
 
@@ -54,6 +50,7 @@ define [
       q = @search_input().val()
 
       @$el.find("a").removeClass "active"
+      @search_input().addClass("searching")
 
       mediator.publish @collection_name + ":search", q
 

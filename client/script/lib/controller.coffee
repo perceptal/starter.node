@@ -6,6 +6,7 @@ define ["underscore", "cs!./mediator", "cs!./subscriber"], (_, mediator, Subscri
 
     name: null
     router: null
+    collection: null
 
     constructor: ->
       @initialize()

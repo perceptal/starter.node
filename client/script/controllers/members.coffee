@@ -22,6 +22,7 @@ define [
 
     initialize: ->
       @name = "members"
+      @collection = new Members()
 
       mediator.subscribe "members:search", @search, @
       mediator.subscribe "members:select", @show, @
@@ -32,13 +33,14 @@ define [
 
     index: ->
       self = @
-      collection = new Members()
 
-      collection.fetch
+      @collection.url = @collection.urlRoot
+
+      @collection.fetch
         success: ->
-          self.main_region.show new IndexView(collection: collection)
+          self.main_region.show new IndexView(collection: self.collection)
 
-        error: (collection, res) ->
+        error: (data, res) ->
           self.error res.responseText
 
         complete: ->
@@ -64,19 +66,19 @@ define [
       return if q.length == 0
 
       self = @
-      collection = new Members()
-      collection.url = collection.search_url q
+      @collection.url = @collection.search_url q
 
-      collection.fetch
+      @collection.fetch
         success: ->
-          self.main_region.show new IndexView(collection: collection)
+          self.main_region.show new IndexView(collection: self.collection)
 
-          self.warning "No members found" if collection.isEmpty()
+          self.warning "No members found" if self.collection.isEmpty()
 
-        error: (collection, res) ->
+        error: (data, res) ->
           self.error res.responseText
 
         complete: ->
           self.collection_menu(q)
           self.router.navigate "members/search/" + q
+
           mediator.publish "members:searched"

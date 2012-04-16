@@ -13,4 +13,4 @@ exports.disconnect = ->
 
 exports.development = "mongodb://localhost/starter_development"
 exports.test = "mongodb://localhost/starter_test"
-exports.production = "mongodb://localhost/starter_production"
+exports.production = process.env.MONGOHQ_URL
