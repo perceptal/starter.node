@@ -3,6 +3,7 @@ model = require "./server/models/model"
 
 connect = ->
   connection.connect connection[process.env.NODE_ENV || "development"]
+  console.log connection[process.env.NODE_ENV || "development"]
 
 disconnect = ->
   connection.disconnect()
@@ -66,7 +67,8 @@ task "seed", [], (params) ->
   johnny.save()
 
   johnny_photo = new Photo
-    person: johnny._id
+    person:     johnny._id
+    is_default: true
   johnny_photo.put "./client/images/photos/bill.jpg", "bill.jpg"
   johnny_photo.save(disconnect)
 
