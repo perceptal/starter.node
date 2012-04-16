@@ -46,15 +46,17 @@ define [
 
     show: (id) ->
       self = @
-      model = new Member({ _id: id })
 
-      model.fetch
-        success: ->
+      @collection.find
+        id: id
+
+        success: (model) ->
           self.main_region.show new ShowView(model: model)
           self.model_menu model
+
           self.router.navigate "members/" + id
 
-        error: (model, res) ->
+        error: (data, res) ->
           self.error res.responseText
 
         complete: ->

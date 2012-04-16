@@ -46,16 +46,17 @@ define [
 
     show: (id) ->
       self = @
-      model = new Organisation({ _id: id })
 
-      model.fetch
-        success: ->
+      @collection.find
+        id: id
+
+        success: (model) ->
           self.main_region.show new ShowView(model: model)
           self.model_menu model
 
           self.router.navigate "administration/organisations/" + id
 
-        error: (model, res) ->
+        error: (data, res) ->
           self.error res.responseText
 
         complete: ->

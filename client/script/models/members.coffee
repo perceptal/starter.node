@@ -1,26 +1,10 @@
-define ["cs!lib/collection", "cs!./member"], (Collection, Organisation) ->
+define ["cs!lib/collection", "cs!./member"], (Collection, Member) ->
 
-  class Organisations extends Collection
+  class Members extends Collection
 
-    model:    Organisation
+    model:    Member
 
     urlRoot:  "/people/"
 
     initialize: ->
       @url = @urlRoot
-
-    search: (options) ->
-      self = @
-
-      @url = "search/" + options.query
-
-      @fetch
-        success: ->
-          options.success()
-
-        error: (data, res) ->
-          options.error(data, res)
-          
-        complete: ->
-          options.complete()
-          self.url = self.urlRoot
