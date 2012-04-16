@@ -5,18 +5,22 @@ define ["cs!lib/collection", "cs!./organisation"], (Collection, Organisation) ->
     model:    Organisation
 
     urlRoot:  "/organisations/"
-    url:      "/organisations/"
 
-    search_url: (q) ->
-      @url + "search/" + q
-
-    search: (q, render) ->
-      @query = q
-
-      @url = @search_url q
-
-      @fetch()
-
+    initialize: ->
       @url = @urlRoot
 
-      this
+    search: (options) ->
+      self = @
+
+      @url = "search/" + options.query
+
+      @fetch
+        success: ->
+          options.success()
+
+        error: (data, res) ->
+          options.error(data, res)
+          
+        complete: ->
+          options.complete()
+          self.url = self.urlRoot

@@ -34,8 +34,6 @@ define [
     index: ->
       self = @
 
-      @collection.url = @collection.urlRoot
-
       @collection.fetch
         success: ->
           self.main_region.show new IndexView(collection: self.collection)
@@ -66,9 +64,10 @@ define [
       return if q.length == 0
 
       self = @
-      @collection.url = @collection.search_url q
 
-      @collection.fetch
+      @collection.search
+        query: q
+
         success: ->
           self.main_region.show new IndexView(collection: self.collection)
 

@@ -14,7 +14,7 @@ hash = (password, salt) ->
   crypto.createHmac("sha256", salt).update(password).digest("hex");
 
 UserSchema.methods.set_password = (password) ->
-  @hashed_password = hash(passwordString, @salt)
+  @hashed_password = hash(password, @salt)
 
 UserSchema.methods.authenticate = (password) ->
   @hashed_password == hash(password, @salt)

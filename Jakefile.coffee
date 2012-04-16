@@ -37,12 +37,14 @@ task "seed", [], (params) ->
     username:   "root"
     email:      "root@perceptal.co.uk"
   )
+  root_user.set_password "password"
   root_user.save()
 
   johnny_user = new User(
     username:   "johnny"
     email:      "johnny@recipher.co.uk"
   )
+  johnny_user.set_password "password"
   johnny_user.save()
 
   root = new Person(
