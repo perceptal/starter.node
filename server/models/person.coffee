@@ -1,7 +1,7 @@
 mongoose  = require "mongoose"
 Schema    = mongoose.Schema
 
-PersonSchema = new Schema(
+PersonSchema = new Schema
   owner       : { type: Schema.ObjectId }
   first_name  : { type: String, required: true }
   last_name   : { type: String, required: true }
@@ -13,7 +13,6 @@ PersonSchema = new Schema(
   tel         : { type: String }
   user        : { type: Schema.ObjectId, ref: "user" }
   group       : { type: Schema.ObjectId , ref: "group" }
-)
 
 PersonSchema.statics.search = (query) ->
   @where("first_name", new RegExp(query, "i"))

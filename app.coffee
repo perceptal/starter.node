@@ -6,7 +6,7 @@ controller = require "./server/controllers/controller"
 app = configure()
 
 # Models
-["group", "user", "person", "role"].map((name) -> model(name))
+["group", "user", "person", "role", "photo"].map((name) -> model(name))
 
 # Resources
 ["group", "user", "person"].map((name) -> resource.map(app, name))

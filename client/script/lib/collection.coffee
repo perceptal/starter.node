@@ -8,9 +8,8 @@ define ["underscore", "backbone", "cs!./subscriber"], (_, Backbone, Subscriber) 
       self = @
 
       model = @get options.id
-      console.log model
 
-      if model == undefined
+      if _.isUndefined model
 
         model = new @model({ _id: options.id })
 

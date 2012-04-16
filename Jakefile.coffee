@@ -12,51 +12,47 @@ task "seed", [], (params) ->
 
   connect()
 
-  Group = model "group"
-  User = model "user"
-  Person = model "person"
+  Group   = model "group"
+  User    = model "user"
+  Person  = model "person"
+  Photo   = model "photo"
 
-  sys = new Group(
+  sys = new Group
     name: "System"
     code: "380800"
     email: "system@perceptal.co.uk"
     tel: "01896 830894"
-  )
   sys.save()
 
-  demo = new Group(
+  demo = new Group
     name:       "Demo"
     code:       "999999"
     email:      "demo@perceptal.co.uk"
     tel:        "01896 830894"
     parent:     sys._id
-  )
   demo.save()
 
-  root_user = new User(
+  root_user = new User
     username:   "root"
     email:      "root@perceptal.co.uk"
-  )
   root_user.set_password "password"
   root_user.save()
 
-  johnny_user = new User(
+  johnny_user = new User
     username:   "johnny"
     email:      "johnny@recipher.co.uk"
-  )
   johnny_user.set_password "password"
   johnny_user.save()
 
-  root = new Person(
+  root = new Person
     first_name: "System"
     last_name:  "Administrator"
     email:      "root@perceptal.co.uk"
     user:       root_user._id
     group:      sys._id
-  )
   root.save()
 
-  johnny = new Person(
+  johnny = new Person
     first_name: "Johnny"
     last_name:  "Hall"
     gender:     "Male"
@@ -67,8 +63,12 @@ task "seed", [], (params) ->
     tel:        "07971 880871"
     user:       johnny_user._id
     group:      sys._id
-  )
-  johnny.save(disconnect)
+  johnny.save()
+
+  johnny_photo = new Photo
+    person: johnny._id
+  johnny_photo.put "./client/images/photos/bill.jpg", "bill.jpg"
+  johnny_photo.save(disconnect)
 
 desc "Clean datastore"
 task("clean", [], (params) ->
