@@ -1,11 +1,11 @@
 { "menu" : [
-    { "url": "#members/:id",         "text": "Information",  "classifier": "page" }
-  , { "url": "#members/:id/photos",  "text": "Photos",       "classifier": "page" }
-  , { "url": "#members/:id/roles",   "text": "Permissions",  "classifier": "page" }
-  , { "url": "#members/:id/upload",  "text": "Upload",       "classifier": "action" }
-  , { "url": "#members/:id/lock",    "text": "Lock",         "classifier": "action",
+    { "url": "#members/:id",            "text": "Information",  "classifier": "page" }
+  , { "url": "#members/:id/photos",     "text": "Photos",       "classifier": "page" }
+  , { "url": "#members/:id/roles",      "text": "Permissions",  "classifier": "page" }
+  , { "url": "#members/:id/photos/new", "text": "Upload",       "classifier": "action" }
+  , { "url": "#members/:id/lock",       "text": "Lock",         "classifier": "action",
       "condition": { "property": "locked", "value": "false" } }
-  , { "url": "#members/:id/unlock",    "text": "Unlock",     "classifier": "action",
+  , { "url": "#members/:id/unlock",     "text": "Unlock",     "classifier": "action",
       "condition": { "property": "locked", "value": "true" } }
   ]
 }

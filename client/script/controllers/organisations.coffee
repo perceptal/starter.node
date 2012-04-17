@@ -3,14 +3,13 @@ define [
   , "cs!lib/region"
   , "cs!lib/controller"
   , "cs!models/organisations"
-  , "cs!models/organisation"
   , "cs!views/organisations/index"
   , "cs!views/organisations/show"
   , "cs!views/navigation/collection"
   , "cs!views/navigation/model"
   , "text!data/navigation/organisations.json"
   , "text!data/navigation/organisation.json"
-], (mediator, Region, Controller, Organisations, Organisation, IndexView, ShowView, CollectionMenuView, ModelMenuView, organisations, organisation) ->
+], (mediator, Region, Controller, Organisations, IndexView, ShowView, CollectionMenuView, ModelMenuView, organisations, organisation) ->
 
   class OrganisationsController extends Controller
 
@@ -27,9 +26,9 @@ define [
       mediator.subscribe "organisations:search", @search, @
       mediator.subscribe "organisations:select", @show, @
 
-      @main_region = new Region({ el: "#body .content" })
+      @main_region            = new Region({ el: "#body .content" })
       @collection_menu_region = new Region({ el: "#body header" })
-      @model_menu_region = new Region({ el: "#body .content", method: "append" })
+      @model_menu_region      = new Region({ el: "#body .content", method: "append" })
 
     index: ->
       self = @

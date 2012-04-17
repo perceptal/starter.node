@@ -11,7 +11,7 @@ define [
   , "text!data/navigation/member.json"
 ], (mediator, Region, Controller, Members, IndexView, ShowView, CollectionMenuView, ModelMenuView, members, member) ->
 
-  class MembersController extends Controller
+  class PhotosController extends Controller
 
     collection_menu: (q) ->
       @collection_menu_region.show new CollectionMenuView({ collection_name: @name, menu: members, query: q or= "" })
@@ -23,37 +23,21 @@ define [
       @name = "members"
       @collection = new Members()
 
-      mediator.subscribe "members:search", @search, @
-      mediator.subscribe "members:select", @show, @
-
       @main_region            = new Region({ el: "#body .content" })
       @collection_menu_region = new Region({ el: "#body header" })
       @model_menu_region      = new Region({ el: "#body .content", method: "append" })
 
-    index: ->
-      self = @
-
-      @collection.fetch
-        success: ->
-          self.main_region.show new IndexView(collection: self.collection)
-
-        error: (data, res) ->
-          self.error res.responseText
-
-        complete: ->
-          self.collection_menu()
-
-    show: (id) ->
+    index: (member_id) ->
       self = @
 
       @collection.find
-        id: id
+        id: member_id
 
         success: (model) ->
           self.main_region.show new ShowView(model: model)
           self.model_menu model
 
-          self.router.navigate "members/" + id
+          self.router.navigate "members/" + member_id + "/photos"
 
         error: (data, res) ->
           self.error res.responseText
@@ -61,24 +45,5 @@ define [
         complete: ->
           self.collection_menu()
 
-    search: (q) ->
-      return if q.length == 0
-
-      self = @
-
-      @collection.search
-        query: q
-
-        success: ->
-          self.main_region.show new IndexView(collection: self.collection)
-
-          self.warning "No members found" if self.collection.isEmpty()
-
-        error: (data, res) ->
-          self.error res.responseText
-
-        complete: ->
-          self.collection_menu(q)
-          self.router.navigate "members/search/" + q
-
-          mediator.publish "members:searched"
+      upload: (member_id) ->
+        self = @

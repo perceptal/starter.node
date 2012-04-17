@@ -6,10 +6,11 @@ define [
   , "cs!routers/home"
   , "cs!routers/organisations"
   , "cs!routers/members"
+  , "cs!routers/photos"
   , "text!data/navigation/main.json"
   , "text!data/navigation/support.json"
   , "text!data/navigation/user.json"
-], (Backbone, Navigation, Dialog, Controller, HomeRouter, OrganisationsRouter, MembersRouter, main, support, user) ->
+], (Backbone, Navigation, Dialog, Controller, HomeRouter, OrganisationsRouter, MembersRouter, PhotosRouter, main, support, user) ->
 
   class ApplicationController extends Controller
 
@@ -23,5 +24,6 @@ define [
       new HomeRouter()
       new OrganisationsRouter()
       new MembersRouter()
+      new PhotosRouter()
 
       Backbone.history.start()
