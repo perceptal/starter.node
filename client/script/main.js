@@ -11,6 +11,7 @@ require.config({
     jquery:         "vendor/jquery-1.7.1"
   , underscore:     "vendor/underscore-1.3.1"
   , backbone:       "vendor/backbone-0.9.1"
+  , localstorage:   "vendor/backbone-localstorage"
   , Handlebars:     "vendor/handlebars-1.0.0.beta.4"
   , text:           "vendor/require-text-1.0.7"
   , domready:       "vendor/require-domready-1.0.0"

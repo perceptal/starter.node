@@ -1,10 +1,10 @@
 define ["backbone", "cs!lib/collection", "cs!./member"], (Backbone, Collection, Member) ->
 
-  class Members extends Collection
+  class Photos extends Collection
 
-    model:    Member
+    model:    Photos
 
-    urlRoot:  "/people/"
+    urlRoot:  "/people/" + @get("member_id") + "/photos"
 
     initialize: ->
       @url = @urlRoot

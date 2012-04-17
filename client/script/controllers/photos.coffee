@@ -3,13 +3,14 @@ define [
   , "cs!lib/region"
   , "cs!lib/controller"
   , "cs!models/members"
-  , "cs!views/members/index"
+  , "cs!models/photos"
   , "cs!views/members/show"
+  , "cs!views/photos/index"
   , "cs!views/navigation/collection"
   , "cs!views/navigation/model"
   , "text!data/navigation/members.json"
   , "text!data/navigation/member.json"
-], (mediator, Region, Controller, Members, IndexView, ShowView, CollectionMenuView, ModelMenuView, members, member) ->
+], (mediator, Region, Controller, Members, Photos, ShowView, IndexView, CollectionMenuView, ModelMenuView, members, member) ->
 
   class PhotosController extends Controller
 
@@ -26,6 +27,7 @@ define [
       @main_region            = new Region({ el: "#body .content" })
       @collection_menu_region = new Region({ el: "#body header" })
       @model_menu_region      = new Region({ el: "#body .content", method: "append" })
+      @data_region            = new Region({ el: "#body .content", method: "append" })
 
     index: (member_id) ->
       self = @
@@ -34,10 +36,14 @@ define [
         id: member_id
 
         success: (model) ->
-          self.main_region.show new ShowView(model: model)
-          self.model_menu model
-
-          self.router.navigate "members/" + member_id + "/photos"
+ 
+          collection = new Photos({ member_id: member_id })
+          collection.fetch
+            success: ->
+              self.main_region.show new ShowView(model: model)
+              self.model_menu model
+              self.data_region.show new IndexView(collection: collection)
+              self.router.navigate "members/" + member_id + "/photos"
 
         error: (data, res) ->
           self.error res.responseText

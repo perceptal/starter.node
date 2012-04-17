@@ -6,3 +6,4 @@ define ["cs!lib/controller"], (Controller) ->
       @name = "home"
 
     index: ->
+    

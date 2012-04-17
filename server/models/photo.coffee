@@ -1,4 +1,4 @@
-s3        = require("../../server/config/s3")
+s3        = require "../../server/config/s3"
 mongoose  = require "mongoose"
 Schema    = mongoose.Schema
 

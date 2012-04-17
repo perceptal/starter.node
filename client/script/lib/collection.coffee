@@ -4,6 +4,10 @@ define ["underscore", "backbone", "cs!./subscriber"], (_, Backbone, Subscriber) 
 
     _(Collection.prototype).defaults Subscriber
 
+    sync: Backbone.syncLocal if @supports_local_storage
+
+    supports_local_storage: false
+
     find: (options) ->
       self = @
 

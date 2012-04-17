@@ -1,4 +1,4 @@
-define ["cs!lib/collection", "cs!./organisation"], (Collection, Organisation) ->
+define ["localstorage", "cs!lib/collection", "cs!./organisation"], (LocalStorage, Collection, Organisation) ->
 
   class Organisations extends Collection
 
@@ -8,3 +8,7 @@ define ["cs!lib/collection", "cs!./organisation"], (Collection, Organisation) ->
 
     initialize: ->
       @url = @urlRoot
+
+    supports_local_storage: true
+
+    localStorage: new LocalStorage("organisations")

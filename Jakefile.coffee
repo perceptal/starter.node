@@ -3,7 +3,6 @@ model = require "./server/models/model"
 
 connect = ->
   connection.connect connection[process.env.NODE_ENV || "development"]
-  console.log connection[process.env.NODE_ENV || "development"]
 
 disconnect = ->
   connection.disconnect()
